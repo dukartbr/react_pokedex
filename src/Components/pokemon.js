@@ -6,7 +6,8 @@ class Pokemon extends Component {
     state = {
         pokemons: [],
         pokemonName: null,
-        pokemonAbilites: []
+        pokemonAbilites: [],
+        pokemonMoves: []
     }
 
     componentDidMount() {
@@ -22,14 +23,15 @@ class Pokemon extends Component {
             console.log(response)
             this.setState({
                 pokemonName: response.data.name,
-                pokemonAbilites: response.data.abilities
-                })
+                pokemonAbilites: response.data.abilities,
+                pokemonMoves: response.data.moves
+                });
             }  
         )
     }
 
     render() {
-        const { pokemons } = this.state;
+        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves } = this.state;
         return (
             <div>
                 <div className="pokemonList--container">
@@ -38,8 +40,10 @@ class Pokemon extends Component {
                     ))}
                 </div>
                 <PokemonCard 
-                    pokemonName={this.state.pokemonName}
-                    pokemonAbilites={this.state.pokemonAbilites}
+                    key={pokemonName}
+                    pokemonName={pokemonName}
+                    pokemonAbilites={pokemonAbilites}
+                    pokemonMoves={pokemonMoves}
                 />
             </div>
         );

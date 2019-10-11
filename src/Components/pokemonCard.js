@@ -1,8 +1,8 @@
 import React from 'react';
 
 const PokemonCard = (props) => {
-    console.log(props.pokemonAbilites);
-    const {pokemonAbilites, pokemonName} = props;
+    const {pokemonAbilites, pokemonName, pokemonMoves} = props;
+    console.log(pokemonMoves);
     return (
         <div className="container">
             <div className="row">
@@ -12,6 +12,12 @@ const PokemonCard = (props) => {
                     <ul>
                         {pokemonAbilites.map(ability => (
                             <li>{ability.ability.name}</li>
+                        ))}
+                    </ul>
+                    <p>Moves</p>
+                    <ul>
+                        {pokemonMoves.slice(0, 4).map(move => (
+                            <li>{move.move.name}</li>
                         ))}
                     </ul>
                 </div>
