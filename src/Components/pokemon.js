@@ -21,7 +21,8 @@ class Pokemon extends Component {
         Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then( response => {
             console.log(response)
             this.setState({
-                pokemonName: response.data.name
+                pokemonName: response.data.name,
+                pokemonAbilites: response.data.abilities
                 })
             }  
         )
@@ -38,6 +39,7 @@ class Pokemon extends Component {
                 </div>
                 <PokemonCard 
                     pokemonName={this.state.pokemonName}
+                    pokemonAbilites={this.state.pokemonAbilites}
                 />
             </div>
         );
