@@ -146,8 +146,15 @@ $DarkPurple: #4F045A;
             height: 250px;
             display: block;
             text-align: center;
+            position: relative;
             img {
                 width: 200px;
+            }
+            .pokemonCard--favorite {
+                position: absolute;
+                color: white;
+                top: 5px;
+                left: 5px;
             }
             .pokemonCard--stat-container {
                 padding: 15px 20px;
@@ -168,6 +175,22 @@ $DarkPurple: #4F045A;
                             float: right;
                         }
                     }
+                }
+            }
+        }
+        .pokemonCard--moves-container {
+            width: 100%;
+            h3 {
+                text-align: center;
+            }
+            ul {
+                width: 100%;
+                li {
+                    width: 50%;
+                    list-style-type: none;
+                    display: inline;
+                    background-color: $Yellow;
+                    padding: 10px 30px;
                 }
             }
         }

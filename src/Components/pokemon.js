@@ -13,7 +13,8 @@ class Pokemon extends Component {
         pokemonImages: {},
         pokemonStats: [],
         pokemonTypes: [],
-        Favorites: []
+        Favorites: [],
+        isFavorited: false
     }
 
     componentDidMount() {
@@ -40,7 +41,7 @@ class Pokemon extends Component {
     }
 
     render() {
-        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Favorites } = this.state;
+        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Favorites, isFavorited } = this.state;
         return (
             <div className="row">
                 <div className="col-6">
@@ -60,8 +61,11 @@ class Pokemon extends Component {
                                         <p className="favorites--header">Favorites</p>
                                     </div>
                                 </div>
-
-                                <Favorite pokemonImage={pokemonImages} />
+                                {Favorites ? Favorites.map(Favorite => (
+                                    <Favorite pokemonImage={pokemonImages} pokemonName={pokemonName}/>
+                                )) 
+                                    :null
+                                }
                             </div>
                         </div>
                     </div>
@@ -78,6 +82,7 @@ class Pokemon extends Component {
                             pokemonImages={pokemonImages}
                             pokemonStats={pokemonStats}
                             pokemonTypes={pokemonTypes}
+                            isFavorited={isFavorited}
                         />
                         </div>
                     </div>

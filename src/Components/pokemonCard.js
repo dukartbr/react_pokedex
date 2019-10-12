@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const PokemonCard = (props) => {
-    const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes} = props;
-    return (
-        <div className="container">
+class pokemonCard extends Component {
+
+    state = {
+        isFavorited: false        
+    }
+
+    toggleFavorites = (pokemon) => {
+        console.log(pokemon)
+    }
+
+    render() {
+        const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, isFavorited} = this.props;
+
+        return (
+            <div className="container">
             <div className="pokemonCard--container">
                 <div className="pokemonCard--header">
                     <h2>{pokemonName ? pokemonName: 'Select A Pokemon!'}</h2>
@@ -12,6 +23,9 @@ const PokemonCard = (props) => {
                     ))}
                 </div>
                 <div className="pokemonCard--screen">
+                    <button onClick={() => this.toggleFavorites(pokemonName)} className="pokemonCard--favorite">
+                        <i className="fas fa-star"></i>
+                    </button>
                     <div className="row">
                         <div className="col-3">
                             <img src={pokemonImages.front_default} alt="" />
@@ -38,18 +52,22 @@ const PokemonCard = (props) => {
                         </ul>
                     </div>
                     <div className="col-6">
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="pokemonCard--moves-container">
                         <h3>Moves</h3>
                         <ul>
                             {pokemonMoves.slice(0, 4).map(move => (
-                                <li key={move.move.name}>{move.move.name}</li>
+                                <li key={move.move.name} className="pokemonCard--moves-item">{move.move.name}</li>
                             ))}
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
-    );
-};
+        );
+    }
+}
 
-export default PokemonCard;
+export default pokemonCard;
