@@ -1,5 +1,10 @@
 $AppHeight: 800px;
 
+$DarkRed: #DC0059;
+$LightRed: #FF0050;
+
+$DarkPurple: #4F045A;
+
 .App {
     background-color: #F1F5E6;
     height: 100vh;
@@ -7,23 +12,38 @@ $AppHeight: 800px;
 .pokedex--header {
     h1 {
         text-align: center;
+        font-family: 'Acme', sans-serif;
+        font-size: 60px;
     }
 }
 
 .left-container {
-    background-color: #DC0059;
+    background-color: $DarkRed;
     border-radius: 50px 0px 0px 50px;
-    border: 2px solid black;
+    border: 2px solid $DarkPurple;
     padding: 30px;
     height: $AppHeight;
+    position: relative;
+    box-shadow: 5px 10px 15px $DarkPurple;
+    .pokedex-left-header--container {
+        background-color: $LightRed;
+        position: absolute;
+        margin-left: -30px;
+        margin-top: -30px;
+        border-radius: 50px 0px 0px 0px;
+        width: 100%;
+        height: 100px;
+        box-shadow: 1px 2px 5px $DarkPurple;
+    }
     .pokemonList--container__padding {
         padding: 50px 10px;
         background-color: #F1F5E6;
-        border: 2px solid black;
+        border: 2px solid $DarkPurple;
         border-radius: 30px;
+        margin-top: 110px;
         .pokemonList--container {
             overflow: scroll;
-            height: 500px;
+            height: 400px;
             background: repeating-linear-gradient(
                 45deg,
                 #14DAFF,
@@ -31,27 +51,46 @@ $AppHeight: 800px;
                 #14EAFF 80px,
                 #14EAFF 160px
                 );
+            border: 2px solid $DarkPurple;
+            border-radius: 15px;
             button {
                 padding: 10px 20px;
-    
+                background: none;
+                border: none;
+                color: white;
+                font-size: 55px;
                 text-align: center;
                 display: block;
                 margin: 10px 0px;
+                margin-right: auto;
+                margin-left: auto;
+                font-family: 'Acme', sans-serif;
+                text-transform: capitalize;
             }
         }
     }
 }
 
 .right-container {
-    background-color: #FF0050;
+    background-color: $LightRed;
+    border-radius: 0px 50px 50px 0px;
+    border: 2px solid $DarkPurple;
     padding: 30px 0px;
     height: $AppHeight;
+    position: relative;
+    box-shadow: 5px 10px 15px $DarkPurple;
     .pokemonCard--container {
         padding: 30px 10px;
         background-color: #F1F5E6;
+        border: 2px solid $DarkPurple;
+        border-radius: 15px;
         h2 {
             text-align: center;
             font-family: 'Acme', sans-serif;
+        }
+        h3 {
+            font-family: 'Asap', sans-serif;
+            text-align: center;
         }
         .pokemonCard--screen {
             background: repeating-linear-gradient(
@@ -61,10 +100,34 @@ $AppHeight: 800px;
                 #14EAFF 20px,
                 #14EAFF 40px
                 );
-            border: 5px solid black;
+            border: 2px solid $DarkPurple;
             border-radius: 15px;
+            height: 250px;
+            display: block;
+            text-align: center;
             img {
                 width: 200px;
+            }
+            .pokemonCard--stat-container {
+                padding: 15px 20px;
+                h3 {
+                    color: white;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+                ul {
+                    li {
+                        list-style-type: none;
+                        color: white;
+                        text-align: left;
+                        font-weight: bold;
+                        font-family: 'Asap', sans-serif;
+                        text-transform: uppercase;
+                        .pokemonCard--base-stat {
+                            float: right;
+                        }
+                    }
+                }
             }
         }
     }
