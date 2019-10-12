@@ -2,7 +2,7 @@ $AppHeight: 1000px;
 
 $DarkRed: #DC0059;
 $LightRed: #FF0050;
-
+$Orange: #FF8945;
 $Yellow: #FAF139;
 $BlueOne: #00FC2B;
 $BlueTwo: #14EAFF;
@@ -155,6 +155,10 @@ $DarkPurple: #4F045A;
                 color: white;
                 top: 5px;
                 left: 5px;
+                background-color: $Orange;
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
             }
             .pokemonCard--stat-container {
                 padding: 15px 20px;

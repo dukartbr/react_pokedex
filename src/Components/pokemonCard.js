@@ -6,8 +6,8 @@ class pokemonCard extends Component {
         isFavorited: false        
     }
 
-    toggleFavorites = (pokemon) => {
-        console.log(pokemon)
+    toggleFavorites = () => {
+        console.log("hello")
     }
 
     render() {
@@ -23,7 +23,7 @@ class pokemonCard extends Component {
                     ))}
                 </div>
                 <div className="pokemonCard--screen">
-                    <button onClick={() => this.toggleFavorites(pokemonName)} className="pokemonCard--favorite">
+                    <button onClick={()=> this.toggleFavorites()} className="pokemonCard--favorite">
                         <i className="fas fa-star"></i>
                     </button>
                     <div className="row">
