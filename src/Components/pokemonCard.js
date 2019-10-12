@@ -2,15 +2,16 @@ import React from 'react';
 
 const PokemonCard = (props) => {
     console.log(props);
-    const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats} = props;
-    let pokemonNameCapitalized;
-    if(pokemonName) {
-        pokemonNameCapitalized = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-    }
+    const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes} = props;
     return (
         <div className="container">
             <div className="pokemonCard--container">
-                <h2>{pokemonNameCapitalized ? pokemonNameCapitalized : 'Select A Pokemon!'}</h2>
+                <div className="pokemonCard--header">
+                    <h2>{pokemonName ? pokemonName: 'Select A Pokemon!'}</h2>
+                    {pokemonTypes.map(type => (
+                        <span className="pokemonCard--type">{type.type.name}</span>
+                    ))}
+                </div>
                 <div className="pokemonCard--screen">
                     <div className="row">
                         <div className="col-3">

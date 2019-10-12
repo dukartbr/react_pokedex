@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import PokemonCard from './pokemonCard';
 import PokedexLeftHeader from './PokedexLeftHeader';
+import Favorite from './Favorite';
 
 class Pokemon extends Component {
     state = {
@@ -11,6 +12,7 @@ class Pokemon extends Component {
         pokemonMoves: [],
         pokemonImages: {},
         pokemonStats: [],
+        pokemonTypes: [],
         Favorites: []
     }
 
@@ -31,14 +33,15 @@ class Pokemon extends Component {
                 pokemonAbilites: res.abilities,
                 pokemonMoves: res.moves,
                 pokemonImages: res.sprites,
-                pokemonStats: res.stats
+                pokemonStats: res.stats,
+                pokemonTypes: res.types
                 });
             }  
         )
     }
 
     render() {
-        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages, pokemonStats } = this.state;
+        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Favorites } = this.state;
         return (
             <div className="row">
                 <div className="col-6">
@@ -52,8 +55,17 @@ class Pokemon extends Component {
                                     ))}
                                 </div>
                             </div>
+                            <div className="favorites--container">
+                                <p className="favorites--header">
+                                    Favorites
+                                </p>
+                                {Favorites.length > 0 ? 
+                                    <Favorite />
+                                : null }
+                            </div>
                         </div>
                     </div>
+
                 </div>
                 <div className="col-6">
                     <div className="right-container">
@@ -65,6 +77,7 @@ class Pokemon extends Component {
                             pokemonMoves={pokemonMoves}
                             pokemonImages={pokemonImages}
                             pokemonStats={pokemonStats}
+                            pokemonTypes={pokemonTypes}
                         />
                         </div>
                     </div>
