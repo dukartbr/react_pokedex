@@ -1,13 +1,22 @@
-$AppHeight: 800px;
+$AppHeight: 1000px;
 
 $DarkRed: #DC0059;
 $LightRed: #FF0050;
+
+$Yellow: #FAF139;
+$BlueOne: #00FC2B;
+$BlueTwo: #14EAFF;
+$BlueThree: #14DAFF;
+$BlueFour: #14A9FF;
+
+$Gray: #F1f5e6;
+$DarkGray: #040054;
 
 $DarkPurple: #4F045A;
 
 .App {
     background-color: #F1F5E6;
-    height: 100vh;
+    height: 150vh;
 }
 .pokedex--header {
     h1 {
@@ -73,6 +82,20 @@ $DarkPurple: #4F045A;
                     font-family: 'Acme', sans-serif;
                     text-transform: capitalize;
                 }
+            }
+        }
+        .favorites--container {
+            padding: 15px 0px;
+            .favorites--header {
+                text-align: center;
+                color: white;
+                font-size: 35px;
+                font-family: 'Acme', sans-serif;
+            }
+            .favorites--item {
+                background-color: $Yellow;
+                height: 100px;
+                width: 100px;
             }
         }
     }

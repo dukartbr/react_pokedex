@@ -27,7 +27,6 @@ class Pokemon extends Component {
     renderCard = (pokemon) => {
         Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then( response => {
             const res = response.data
-            console.log(res)
             this.setState({
                 pokemonName: res.name,
                 pokemonAbilites: res.abilities,
@@ -56,12 +55,13 @@ class Pokemon extends Component {
                                 </div>
                             </div>
                             <div className="favorites--container">
-                                <p className="favorites--header">
-                                    Favorites
-                                </p>
-                                {Favorites.length > 0 ? 
-                                    <Favorite />
-                                : null }
+                                <div className="container">
+                                    <div className="row">
+                                        <p className="favorites--header">Favorites</p>
+                                    </div>
+                                </div>
+
+                                <Favorite pokemonImage={pokemonImages} />
                             </div>
                         </div>
                     </div>

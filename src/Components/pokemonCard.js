@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PokemonCard = (props) => {
-    console.log(props);
     const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes} = props;
     return (
         <div className="container">
@@ -9,7 +8,7 @@ const PokemonCard = (props) => {
                 <div className="pokemonCard--header">
                     <h2>{pokemonName ? pokemonName: 'Select A Pokemon!'}</h2>
                     {pokemonTypes.map(type => (
-                        <span className="pokemonCard--type">{type.type.name}</span>
+                        <span className="pokemonCard--type" key={type.type.name}>{type.type.name}</span>
                     ))}
                 </div>
                 <div className="pokemonCard--screen">
@@ -22,7 +21,7 @@ const PokemonCard = (props) => {
                                 <h3>Stats</h3>
                                 <ul>
                                     {pokemonStats.map(stat => (
-                                        <li>{stat.stat.name} : <span className="pokemonCard--base-stat">{stat.base_stat}</span></li>
+                                        <li key={stat.stat.name}>{stat.stat.name} : <span className="pokemonCard--base-stat">{stat.base_stat}</span></li>
                                     ))}
                                 </ul>
                             </div>
@@ -34,7 +33,7 @@ const PokemonCard = (props) => {
                         <h3>Abilities</h3>
                         <ul>
                             {pokemonAbilites.map(ability => (
-                                <li>{ability.ability.name}</li>
+                                <li key={ability.ability.name}>{ability.ability.name}</li>
                             ))}
                         </ul>
                     </div>
@@ -42,7 +41,7 @@ const PokemonCard = (props) => {
                         <h3>Moves</h3>
                         <ul>
                             {pokemonMoves.slice(0, 4).map(move => (
-                                <li>{move.move.name}</li>
+                                <li key={move.move.name}>{move.move.name}</li>
                             ))}
                         </ul>
                     </div>
