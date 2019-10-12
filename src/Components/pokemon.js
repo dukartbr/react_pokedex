@@ -7,11 +7,12 @@ class Pokemon extends Component {
         pokemons: [],
         pokemonName: null,
         pokemonAbilites: [],
-        pokemonMoves: []
+        pokemonMoves: [],
+        pokemonImages: {}
     }
 
     componentDidMount() {
-        Axios.get('https://pokeapi.co/api/v2/pokemon').then((response)=> {
+        Axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then((response)=> {
             this.setState({
                 pokemons: response.data.results
             })
@@ -20,31 +21,44 @@ class Pokemon extends Component {
 
     renderCard = (pokemon) => {
         Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then( response => {
-            console.log(response)
+            const res = response.data
+            console.log(res)
             this.setState({
-                pokemonName: response.data.name,
-                pokemonAbilites: response.data.abilities,
-                pokemonMoves: response.data.moves
+                pokemonName: res.name,
+                pokemonAbilites: res.abilities,
+                pokemonMoves: res.moves,
+                pokemonImages: res.sprites
                 });
             }  
         )
     }
 
     render() {
-        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves } = this.state;
+        const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages } = this.state;
         return (
-            <div>
-                <div className="pokemonList--container">
-                    {pokemons.map(pokemon => (
-                        <button key={pokemon.name} onClick={() => this.renderCard(pokemon.name)}>{pokemon.name}</button>
-                    ))}
+            <div className="row">
+                <div className="col-6">
+                    <div className="left-container">
+                        <div className="pokemonList--container__padding">
+                            <div className="pokemonList--container">
+                                {pokemons.map(pokemon => (
+                                    <button key={pokemon.name} onClick={() => this.renderCard(pokemon.name)}>{pokemon.name}</button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <PokemonCard 
-                    key={pokemonName}
-                    pokemonName={pokemonName}
-                    pokemonAbilites={pokemonAbilites}
-                    pokemonMoves={pokemonMoves}
-                />
+                <div className="col-6">
+                    <div className="right-container">
+                        <PokemonCard 
+                            key={pokemonName}
+                            pokemonName={pokemonName}
+                            pokemonAbilites={pokemonAbilites}
+                            pokemonMoves={pokemonMoves}
+                            pokemonImages={pokemonImages}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }

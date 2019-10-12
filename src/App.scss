@@ -1,16 +1,76 @@
-.pokemonList--container {
-    button {
-        padding: 10px 20px;
-        background-color: #d9d9d9;
-        text-align: center;
-    }
-}
+$AppHeight: 800px;
 
-.pokemonCard--container {
-    border: 2px solid black;
-    padding: 30px 10px;
+.App {
+    background-color: #F1F5E6;
+    height: 100vh;
+}
+.pokedex--header {
     h1 {
         text-align: center;
     }
 }
+
+.left-container {
+    background-color: #DC0059;
+    border-radius: 50px 0px 0px 50px;
+    border: 2px solid black;
+    padding: 30px;
+    height: $AppHeight;
+    .pokemonList--container__padding {
+        padding: 50px 10px;
+        background-color: #F1F5E6;
+        border: 2px solid black;
+        border-radius: 30px;
+        .pokemonList--container {
+            overflow: scroll;
+            height: 500px;
+            background: repeating-linear-gradient(
+                45deg,
+                #14DAFF,
+                #14DAFF 80px,
+                #14EAFF 80px,
+                #14EAFF 160px
+                );
+            button {
+                padding: 10px 20px;
+    
+                text-align: center;
+                display: block;
+                margin: 10px 0px;
+            }
+        }
+    }
+}
+
+.right-container {
+    background-color: #FF0050;
+    padding: 30px 0px;
+    height: $AppHeight;
+    .pokemonCard--container {
+        padding: 30px 10px;
+        background-color: #F1F5E6;
+        h2 {
+            text-align: center;
+            font-family: 'Acme', sans-serif;
+        }
+        .pokemonCard--screen {
+            background: repeating-linear-gradient(
+                45deg,
+                #14DAFF,
+                #14DAFF 20px,
+                #14EAFF 20px,
+                #14EAFF 40px
+                );
+            border: 5px solid black;
+            border-radius: 15px;
+            img {
+                width: 200px;
+            }
+        }
+    }
+}
+
+
+
+
 
