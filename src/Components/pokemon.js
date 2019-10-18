@@ -40,6 +40,14 @@ class Pokemon extends Component {
         )
     }
 
+    addToFavorites = (pokemon) => {
+        console.log(pokemon)
+        this.setState({
+            Favorites: pokemon
+        })
+        console.log(this.state)
+    }
+
     render() {
         const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Favorites, isFavorited } = this.state;
         return (
@@ -61,11 +69,11 @@ class Pokemon extends Component {
                                         <p className="favorites--header">Favorites</p>
                                     </div>
                                 </div>
-                                {Favorites ? Favorites.map(Favorite => (
+                                {/* {Favorites ? Favorites.map(Favorite => (
                                     <Favorite pokemonImage={pokemonImages} pokemonName={pokemonName}/>
                                 )) 
                                     :null
-                                }
+                                } */}
                             </div>
                         </div>
                     </div>
@@ -83,6 +91,7 @@ class Pokemon extends Component {
                             pokemonStats={pokemonStats}
                             pokemonTypes={pokemonTypes}
                             isFavorited={isFavorited}
+                            FavoriteHandler={this.addToFavorites}
                         />
                         </div>
                     </div>

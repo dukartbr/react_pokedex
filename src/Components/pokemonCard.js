@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 class pokemonCard extends Component {
 
@@ -6,26 +7,41 @@ class pokemonCard extends Component {
         isFavorited: false        
     }
 
-    toggleFavorites = () => {
-        console.log("hello")
+    toggleFavoritesHandler = (pokemon) => {
+        this.setState({
+            isFavorited: !this.state.isFavorited
+        })
+        this.props.FavoriteHandler(pokemon)
+    }
+
+    componentDidMount = () => {
+        const { isFavorited} = this.props;
+        this.setState({
+            isFavorited
+        })
+        // Axios.get()
     }
 
     render() {
-        const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, isFavorited} = this.props;
-
+        const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes} = this.props;
+        console.log(this.props)
         return (
             <div className="container">
             <div className="pokemonCard--container">
                 <div className="pokemonCard--header">
                     <h2>{pokemonName ? pokemonName: 'Select A Pokemon!'}</h2>
-                    {pokemonTypes.map(type => (
-                        <span className="pokemonCard--type" key={type.type.name}>{type.type.name}</span>
+                    {pokemonTypes.map(pokemon => (
+                        <span className="pokemonCard--type" key={pokemon.type.name}>{pokemon.type.name}</span>
                     ))}
                 </div>
                 <div className="pokemonCard--screen">
-                    <button onClick={()=> this.toggleFavorites()} className="pokemonCard--favorite">
-                        <i className="fas fa-star"></i>
-                    </button>
+                    {pokemonName ?
+                        <button onClick={()=> this.toggleFavoritesHandler(this.props)} className="pokemonCard--favorite">
+                            <i className="fas fa-star"></i>
+                        </button>
+                    :
+                        null
+                    }
                     <div className="row">
                         <div className="col-3">
                             <img src={pokemonImages.front_default} alt="" />
@@ -34,8 +50,8 @@ class pokemonCard extends Component {
                             <div className="pokemonCard--stat-container">
                                 <h3>Stats</h3>
                                 <ul>
-                                    {pokemonStats.map(stat => (
-                                        <li key={stat.stat.name}>{stat.stat.name} : <span className="pokemonCard--base-stat">{stat.base_stat}</span></li>
+                                    {pokemonStats.map(pokemon => (
+                                        <li key={pokemon.stat.name}>{pokemon.stat.name} : <span className="pokemonCard--base-stat">{pokemon.base_stat}</span></li>
                                     ))}
                                 </ul>
                             </div>
@@ -46,8 +62,8 @@ class pokemonCard extends Component {
                     <div className="col-6">
                         <h3>Abilities</h3>
                         <ul>
-                            {pokemonAbilites.map(ability => (
-                                <li key={ability.ability.name}>{ability.ability.name}</li>
+                            {pokemonAbilites.map(pokemon => (
+                                <li key={pokemon.ability.name}>{pokemon.ability.name}</li>
                             ))}
                         </ul>
                     </div>
@@ -58,8 +74,8 @@ class pokemonCard extends Component {
                     <div className="pokemonCard--moves-container">
                         <h3>Moves</h3>
                         <ul>
-                            {pokemonMoves.slice(0, 4).map(move => (
-                                <li key={move.move.name} className="pokemonCard--moves-item">{move.move.name}</li>
+                            {pokemonMoves.slice(0, 4).map(pokemon => (
+                                <li key={pokemon.move.name} className="pokemonCard--moves-item"><span className="pokemonCard--moves-title">{pokemon.move.name}</span></li>
                             ))}
                         </ul>
                     </div>

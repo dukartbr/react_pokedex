@@ -151,14 +151,14 @@ $DarkPurple: #4F045A;
                 width: 200px;
             }
             .pokemonCard--favorite {
-                position: absolute;
+                float: left;
                 color: white;
-                top: 5px;
-                left: 5px;
+                margin-top: 5px;
+                margin-left: 5px;
                 background-color: $Orange;
                 border: none;
                 padding: 10px;
-                border-radius: 5px;
+                border-radius: 15px;
             }
             .pokemonCard--stat-container {
                 padding: 15px 20px;
@@ -190,11 +190,15 @@ $DarkPurple: #4F045A;
             ul {
                 width: 100%;
                 li {
-                    width: 50%;
                     list-style-type: none;
                     display: inline;
-                    background-color: $Yellow;
-                    padding: 10px 30px;
+                    padding: 5px 15px;
+                    .pokemonCard--moves-title {
+                        background-color: $Yellow;
+                        border: 1px solid $Orange;
+                        padding: 10px 15px;
+                        border-radius: 30px;
+                    }
                 }
             }
         }
