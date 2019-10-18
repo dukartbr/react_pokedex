@@ -30,13 +30,23 @@ class Pokemon extends Component {
     }
 
     renderCard = (pokemon) => {
+        
         Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then( response => {
-            const res = response.data
-            console.log(res)
+            const res = response.data;
+            const abilityDescriptions = [];
+            res.abilities.map(ability => {
+                const url = ability.ability.url;
+                Axios.get(url).then(response => {
+                    response.data.effect_entries.map(effect => {
+                        abilityDescriptions.push(effect);
+                    })
+                })
+            })
             this.setState({
                 pokemonID: res.id,
                 pokemonName: res.name,
                 pokemonAbilites: res.abilities,
+                pokemonAbilityDescriptions: abilityDescriptions,
                 pokemonMoves: res.moves,
                 pokemonImages: res.sprites,
                 pokemonStats: res.stats,
@@ -45,23 +55,6 @@ class Pokemon extends Component {
                 });
             }  
         )
-        this.getAbilityDescriptions();
-    }
-
-    getAbilityDescriptions = () => {
-        const abilityDescriptions = [];
-        this.state.pokemonAbilites.map(ability => {
-            const url = ability.ability.url
-            Axios.get(url).then(response => {
-                response.data.effect_entries.map(effect => {
-                    abilityDescriptions.push(effect);
-                })
-            })
-        })
-        this.setState({
-            pokemonAbilityDescriptions: abilityDescriptions
-        })
-        console.log(this.state.pokemonAbilityDescriptions);
     }
 
     addToFavorites = (pokemon) => {
