@@ -14,7 +14,8 @@ class Pokemon extends Component {
         pokemonStats: [],
         pokemonTypes: [],
         Favorites: [],
-        isFavorited: false
+        isFavorited: false,
+        showPokemonCard: false
     }
 
     componentDidMount() {
@@ -34,7 +35,8 @@ class Pokemon extends Component {
                 pokemonMoves: res.moves,
                 pokemonImages: res.sprites,
                 pokemonStats: res.stats,
-                pokemonTypes: res.types
+                pokemonTypes: res.types,
+                showPokemonCard: true
                 });
             }  
         )
@@ -82,17 +84,22 @@ class Pokemon extends Component {
                 <div className="col-6 remove-padding">
                     <div className="right-container">
                         <div className="right-container--border">
-                        <PokemonCard 
-                            key={pokemonName}
-                            pokemonName={pokemonName}
-                            pokemonAbilites={pokemonAbilites}
-                            pokemonMoves={pokemonMoves}
-                            pokemonImages={pokemonImages}
-                            pokemonStats={pokemonStats}
-                            pokemonTypes={pokemonTypes}
-                            isFavorited={isFavorited}
-                            FavoriteHandler={this.addToFavorites}
-                        />
+                            {
+                                this.state.showPokemonCard ?
+                                <PokemonCard 
+                                    key={pokemonName}
+                                    pokemonName={pokemonName}
+                                    pokemonAbilites={pokemonAbilites}
+                                    pokemonMoves={pokemonMoves}
+                                    pokemonImages={pokemonImages}
+                                    pokemonStats={pokemonStats}
+                                    pokemonTypes={pokemonTypes}
+                                    isFavorited={isFavorited}
+                                    FavoriteHandler={this.addToFavorites}
+                                />
+                                : null
+                            }
+
                         </div>
                     </div>
                 </div>

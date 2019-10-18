@@ -16,6 +16,7 @@ class pokemonCard extends Component {
 
     componentDidMount = () => {
         const { isFavorited} = this.props;
+        console.log(this.props)
         this.setState({
             isFavorited
         })
@@ -24,7 +25,6 @@ class pokemonCard extends Component {
 
     render() {
         const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes} = this.props;
-        console.log(this.props)
         return (
             <div className="container">
             <div className="pokemonCard--container">
