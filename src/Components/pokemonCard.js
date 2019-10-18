@@ -15,16 +15,16 @@ class pokemonCard extends Component {
     }
 
     componentDidMount = () => {
-        const { isFavorited} = this.props;
+        const { isFavorited, pokemonID } = this.props;
         console.log(this.props)
         this.setState({
             isFavorited
         })
-        // Axios.get()
+
     }
 
     render() {
-        const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes} = this.props;
+        const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, pokemonID} = this.props;
         return (
             <div className="container">
             <div className="pokemonCard--container">
