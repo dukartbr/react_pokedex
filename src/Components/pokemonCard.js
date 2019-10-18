@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 
 class pokemonCard extends Component {
 
     state = {
-        isFavorited: false        
+        isFavorited: false,
+        abilityDescriptions: []
     }
 
     toggleFavoritesHandler = (pokemon) => {
@@ -14,22 +14,21 @@ class pokemonCard extends Component {
         this.props.FavoriteHandler(pokemon)
     }
 
-    componentDidMount = () => {
-        const { isFavorited, pokemonID } = this.props;
-        console.log(this.props)
-        this.setState({
-            isFavorited
-        })
-
+    componentDidUpdate = () => {
+        const { pokemonAbilityDescriptions} = this.props;
+    
     }
 
+    
+
     render() {
-        const {pokemonAbilites, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, pokemonID} = this.props;
+        const {pokemonAbilites, pokemonAbilityDescriptions, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, pokemonID} = this.props;
+        const { isFavorited, abilityDescriptions} = this.state;
         return (
             <div className="container">
             <div className="pokemonCard--container">
                 <div className="pokemonCard--header">
-                    <h2>{pokemonName ? pokemonName: 'Select A Pokemon!'}</h2>
+                    <h2>{pokemonName}</h2>
                     {pokemonTypes.map(pokemon => (
                         <span className="pokemonCard--type" key={pokemon.type.name}>{pokemon.type.name}</span>
                     ))}
@@ -57,15 +56,19 @@ class pokemonCard extends Component {
                             </div>
                         </div>
                     </div>
+                    <span className="pokemonCard--pokemonID">ID: {pokemonID}</span>
                 </div>
                 <div className="row">
                     <div className="col-6">
                         <h3>Abilities</h3>
                         <ul>
-                            {pokemonAbilites.map(pokemon => (
-                                <li key={pokemon.ability.name}>{pokemon.ability.name}</li>
-                            ))}
+                            {pokemonAbilites.map((pokemon, i) => {
+                                return (
+                                    <li key={i}>{pokemon.ability.name} - {abilityDescriptions[i]}</li>
+                                )
+                            })}
                         </ul>
+
                     </div>
                     <div className="col-6">
                     </div>

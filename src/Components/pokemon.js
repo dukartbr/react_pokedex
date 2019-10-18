@@ -37,8 +37,11 @@ class Pokemon extends Component {
             res.abilities.map(ability => {
                 const url = ability.ability.url;
                 Axios.get(url).then(response => {
+                    console.log(response.data);
                     response.data.effect_entries.map(effect => {
-                        abilityDescriptions.push(effect);
+                        console.log(effect)
+                        console.log(effect.effect)
+                        abilityDescriptions.push(effect.effect);
                     })
                 })
             })
@@ -86,11 +89,6 @@ class Pokemon extends Component {
                                         <p className="favorites--header">Favorites</p>
                                     </div>
                                 </div>
-                                {/* {Favorites ? Favorites.map(Favorite => (
-                                    <Favorite pokemonImage={pokemonImages} pokemonName={pokemonName}/>
-                                )) 
-                                    :null
-                                } */}
                             </div>
                         </div>
                     </div>
@@ -115,7 +113,6 @@ class Pokemon extends Component {
                                 />
                                 : <Welcome />
                             }
-
                         </div>
                     </div>
                 </div>

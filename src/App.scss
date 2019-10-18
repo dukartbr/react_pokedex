@@ -114,7 +114,7 @@ $DarkPurple: #4F045A;
     background-color: $LightRed;
     border-radius: 0px 50px 50px 0px;
     border: 2px solid $DarkPurple;
-    padding: 30px 0px;
+    padding: 30px;
     height: $AppHeight;
     position: relative;
     box-shadow: 5px 10px 15px $DarkPurple;
@@ -189,6 +189,13 @@ $DarkPurple: #4F045A;
                         }
                     }
                 }
+            }
+            .pokemonCard--pokemonID {
+                position: absolute;
+                bottom: 5px;
+                right: 5px;
+                color: black;
+                font-weight: bold;
             }
         }
         .pokemonCard--moves-container {
