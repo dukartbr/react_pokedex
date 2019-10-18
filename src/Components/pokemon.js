@@ -52,7 +52,7 @@ class Pokemon extends Component {
         const { pokemons, pokemonName, pokemonAbilites, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Favorites, isFavorited } = this.state;
         return (
             <div className="row">
-                <div className="col-6">
+                <div className="col-6 remove-padding">
                     <div className="left-container">
                         <div className="left-container--border">
                             <PokedexLeftHeader />
@@ -79,7 +79,7 @@ class Pokemon extends Component {
                     </div>
 
                 </div>
-                <div className="col-6">
+                <div className="col-6 remove-padding">
                     <div className="right-container">
                         <div className="right-container--border">
                         <PokemonCard 

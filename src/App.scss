@@ -26,6 +26,11 @@ $DarkPurple: #4F045A;
     }
 }
 
+.remove-padding {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 .left-container {
     background-color: $DarkRed;
     border-radius: 50px 0px 0px 50px;
@@ -191,8 +196,9 @@ $DarkPurple: #4F045A;
                 width: 100%;
                 li {
                     list-style-type: none;
-                    display: inline;
+                    display: block;
                     padding: 5px 15px;
+                    margin-top: 10px;
                     .pokemonCard--moves-title {
                         background-color: $Yellow;
                         border: 1px solid $Orange;
