@@ -100,11 +100,19 @@ $DarkPurple: #4F045A;
                 color: white;
                 font-size: 35px;
                 font-family: 'Acme', sans-serif;
+                width: 100%;
             }
-            .favorites--item {
-                background-color: $Yellow;
-                height: 100px;
-                width: 100px;
+            .favorites--item-container {
+                width: 50px;
+                height: 50px;
+                background: repeating-linear-gradient(
+                    45deg,
+                    #14DAFF,
+                    #14DAFF 80px,
+                    #14EAFF 80px,
+                    #14EAFF 160px
+                );
+                border: 3px solid $Yellow;
             }
         }
     }

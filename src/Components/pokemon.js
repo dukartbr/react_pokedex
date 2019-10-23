@@ -3,8 +3,9 @@ import Axios from 'axios';
 import PokemonCard from './pokemonCard';
 import Welcome from './Welcome';
 import PokedexLeftHeader from './PokedexLeftHeader';
+import PartyItem from './PartyItem';
 
-class Pokemon extends Component {
+class Pokedex extends Component {
     state = {
         pokemons: [],
         pokemonID: [],
@@ -15,8 +16,8 @@ class Pokemon extends Component {
         pokemonImages: {},
         pokemonStats: [],
         pokemonTypes: [],
-        Party: [],
-        isFavorited: false,
+        party: [],
+        isInParty: false,
         showPokemonCard: false
     }
 
@@ -51,14 +52,13 @@ class Pokemon extends Component {
                 pokemonTypes: res.types,
                 showPokemonCard: true
             });
-                console.log(this.state);
-            }
-        )
+        })
     }
 
     addToParty = (pokemon) => {
         this.setState({
-            Party: pokemon
+            ...this.state,
+            pokemon
         })
     }
 
@@ -81,7 +81,14 @@ class Pokemon extends Component {
                                 <div className="container">
                                     <div className="row">
                                         <p className="favorites--header">Party</p>
+                                        <PartyItem      pokemonImages={pokemonImages}/>
+                                        <PartyItem      pokemonImages={pokemonImages}/>
+                                        <PartyItem      pokemonImages={pokemonImages}/>
+                                        <PartyItem      pokemonImages={pokemonImages}/>
+                                        <PartyItem      pokemonImages={pokemonImages}/>
+                                        <PartyItem      pokemonImages={pokemonImages}/>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -116,4 +123,4 @@ class Pokemon extends Component {
     }
 }
 
-export default Pokemon;
+export default Pokedex;

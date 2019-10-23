@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 class pokemonCard extends Component {
-
-    state = {
-        isFavorited: false,
-        abilityDescriptions: [],
-        pokemonName: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            isFavorited: false,
+            abilityDescriptions: [],
+            pokemonName: null
+        }
     }
 
     toggleFavoritesHandler = () => {
@@ -15,8 +18,8 @@ class pokemonCard extends Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
+        console.log('component updated')
         let abilities = this.props.pokemonAbilityDescriptions;
-        console.log(abilities)
         if (prevState && prevState.abilityDescriptions !== abilities) {
             this.setState({
                 abilityDescriptions: abilities
@@ -24,10 +27,16 @@ class pokemonCard extends Component {
         }
     }
 
+    getItemUrl = (url) => {
+        Axios.get(url).then((res) => {
+            const effect = res.data.effect_entries[0].effect;
+            return effect;
+        })
+    }
+
     render() {
         const {pokemonAbilites, pokemonAbilityDescriptions, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, pokemonID} = this.props;
         const {abilityDescriptions} = this.state;
-        console.log(abilityDescriptions)
         return (
             <div className="container">
             <div className="pokemonCard--container">

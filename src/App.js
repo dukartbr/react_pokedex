@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import Pokemon from './Components/pokemon';
+import Pokedex from './Components/pokemon';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <h1>Pokédex</h1>
       </div>
       <div className="container">
-        <Pokemon />
+        <Pokedex />
       </div>
     </div>
   );
