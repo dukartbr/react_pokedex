@@ -3,7 +3,6 @@ import Axios from 'axios';
 import PokemonCard from './pokemonCard';
 import Welcome from './Welcome';
 import PokedexLeftHeader from './PokedexLeftHeader';
-import Favorite from './Favorite';
 
 class Pokemon extends Component {
     state = {
@@ -16,7 +15,7 @@ class Pokemon extends Component {
         pokemonImages: {},
         pokemonStats: [],
         pokemonTypes: [],
-        Favorites: [],
+        Party: [],
         isFavorited: false,
         showPokemonCard: false
     }
@@ -30,19 +29,15 @@ class Pokemon extends Component {
     }
 
     renderCard = (pokemon) => {
-        
-        Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then( response => {
+        Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then( response => {
             const res = response.data;
-            const abilityDescriptions = [];
+            let abilityDescriptions = [];
             res.abilities.map(ability => {
                 const url = ability.ability.url;
                 Axios.get(url).then(response => {
-                    console.log(response.data);
                     response.data.effect_entries.map(effect => {
-                        console.log(effect)
-                        console.log(effect.effect)
-                        abilityDescriptions.push(effect.effect);
-                    })
+                        abilityDescriptions.push(effect.short_effect);
+                    });
                 })
             })
             this.setState({
@@ -55,21 +50,20 @@ class Pokemon extends Component {
                 pokemonStats: res.stats,
                 pokemonTypes: res.types,
                 showPokemonCard: true
-                });
-            }  
+            });
+                console.log(this.state);
+            }
         )
     }
 
-    addToFavorites = (pokemon) => {
-        console.log(pokemon)
+    addToParty = (pokemon) => {
         this.setState({
-            Favorites: pokemon
+            Party: pokemon
         })
-        console.log(this.state)
     }
 
     render() {
-        const { pokemons, pokemonID, pokemonName, pokemonAbilites, pokemonAbilityDescriptions ,pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Favorites, isFavorited } = this.state;
+        const { pokemons, pokemonID, pokemonName, pokemonAbilites, pokemonAbilityDescriptions ,pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, Party, isFavorited } = this.state;
         return (
             <div className="row">
                 <div className="col-6 remove-padding">
@@ -79,14 +73,14 @@ class Pokemon extends Component {
                             <div className="pokemonList--container__padding">
                                 <div className="pokemonList--container">
                                     {pokemons.map(pokemon => (
-                                        <button key={pokemon.name} onClick={() => this.renderCard(pokemon.name)}>{pokemon.name}</button>
+                                        <button key={pokemon.name} onClick={() => this.renderCard(pokemon)}>{pokemon.name}</button>
                                     ))}
                                 </div>
                             </div>
                             <div className="favorites--container">
                                 <div className="container">
                                     <div className="row">
-                                        <p className="favorites--header">Favorites</p>
+                                        <p className="favorites--header">Party</p>
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +102,9 @@ class Pokemon extends Component {
                                     pokemonImages={pokemonImages}
                                     pokemonStats={pokemonStats}
                                     pokemonTypes={pokemonTypes}
+                                    party={Party}
                                     isFavorited={isFavorited}
-                                    FavoriteHandler={this.addToFavorites}
+                                    FavoriteHandler={this.addToParty}
                                 />
                                 : <Welcome />
                             }

@@ -4,26 +4,30 @@ class pokemonCard extends Component {
 
     state = {
         isFavorited: false,
-        abilityDescriptions: []
+        abilityDescriptions: [],
+        pokemonName: null
     }
 
-    toggleFavoritesHandler = (pokemon) => {
+    toggleFavoritesHandler = () => {
         this.setState({
-            isFavorited: !this.state.isFavorited
+            abilityDescriptions: this.props.pokemonAbilityDescriptions
         })
-        this.props.FavoriteHandler(pokemon)
     }
 
-    componentDidUpdate = () => {
-        const { pokemonAbilityDescriptions} = this.props;
-    
+    componentDidUpdate = (prevProps, prevState) => {
+        let abilities = this.props.pokemonAbilityDescriptions;
+        console.log(abilities)
+        if (prevState && prevState.abilityDescriptions !== abilities) {
+            this.setState({
+                abilityDescriptions: abilities
+            })
+        }
     }
-
-    
 
     render() {
         const {pokemonAbilites, pokemonAbilityDescriptions, pokemonName, pokemonMoves, pokemonImages, pokemonStats, pokemonTypes, pokemonID} = this.props;
-        const { isFavorited, abilityDescriptions} = this.state;
+        const {abilityDescriptions} = this.state;
+        console.log(abilityDescriptions)
         return (
             <div className="container">
             <div className="pokemonCard--container">
@@ -59,7 +63,7 @@ class pokemonCard extends Component {
                     <span className="pokemonCard--pokemonID">ID: {pokemonID}</span>
                 </div>
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-12">
                         <h3>Abilities</h3>
                         <ul>
                             {pokemonAbilites.map((pokemon, i) => {
@@ -69,8 +73,6 @@ class pokemonCard extends Component {
                             })}
                         </ul>
 
-                    </div>
-                    <div className="col-6">
                     </div>
                 </div>
                 <div className="row">

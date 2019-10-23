@@ -220,6 +220,19 @@ $DarkPurple: #4F045A;
             }
         }
     }
+    .welcome--container {
+        h1 {
+            text-align: center;
+            color: white;
+            font-family: 'Acme', sans-serif;
+        }
+        .welcome--description {
+            display: block;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
 }
 
 
