@@ -14,7 +14,7 @@ class pokemonCard extends Component {
     toggleFavoritesHandler = () => {
         this.setState({
             abilityDescriptions: this.props.pokemonAbilityDescriptions
-        })
+        }, console.log('hello'))
     }
 
     componentDidUpdate = (prevProps, prevState) => {
