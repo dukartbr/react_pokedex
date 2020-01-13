@@ -4,18 +4,44 @@ import Axios from 'axios';
 class pokemonCard extends Component {
   state = {
     isFavorited: false,
-    abilityDescriptions: [],
     isLoaded: false,
+    abilityDescriptions: [],
+    moves: [],
   };
 
-  getContentFromURLs = pokemon => {
-    console.log(pokemon);
+  getAbilityDescriptions = pokemon => {
     pokemon.pokemonAbilites.map(pokemon => {
       const url = pokemon.ability.url;
       Axios.get(`${url}`).then(response => {
         const res = response.data.effect_entries[0].short_effect;
         this.setState(prevState => ({
           abilityDescriptions: [...prevState.abilityDescriptions, res],
+          // isLoaded: true,
+        }));
+      });
+    });
+  };
+
+  getMoveStats = pokemon => {
+    console.log(pokemon);
+    pokemon.pokemonMoves.map(move => {
+      const url = move.move.url;
+      const moveObject = {
+        name: '',
+        damage_class: '',
+        accuracy: '',
+        power: '',
+      };
+      Axios.get(`${url}`).then(response => {
+        const res = response.data;
+        // console.log(response.data);
+        moveObject.name = res.name;
+        moveObject.damage_class = res.damage_class.name;
+        moveObject.accuracy = res.accuracy;
+        moveObject.power = res.power;
+        console.log(moveObject);
+        this.setState(prevState => ({
+          moves: [...prevState.moves, moveObject],
           isLoaded: true,
         }));
       });
@@ -23,16 +49,19 @@ class pokemonCard extends Component {
   };
 
   componentDidMount() {
-    this.getContentFromURLs(this.props);
+    this.getAbilityDescriptions(this.props);
+    this.getMoveStats(this.props);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.pokemonName !== prevProps.pokemonName) {
       this.setState({
         abilityDescriptions: [],
+        moves: [],
         isLoaded: false,
       });
-      this.getContentFromURLs(this.props);
+      this.getAbilityDescriptions(this.props);
+      this.getMoveStats(this.props);
     }
   }
 
@@ -40,13 +69,12 @@ class pokemonCard extends Component {
     const {
       pokemonAbilites,
       pokemonName,
-      pokemonMoves,
       pokemonImages,
       pokemonStats,
       pokemonTypes,
       pokemonID,
     } = this.props;
-    const { abilityDescriptions, isLoaded } = this.state;
+    const { abilityDescriptions, moves, isLoaded } = this.state;
     // console.log('render', { props: this.props, state: this.state });
     if (isLoaded) {
       return (
@@ -108,18 +136,22 @@ class pokemonCard extends Component {
             <div className='row'>
               <div className='pokemonCard--moves-container'>
                 <h3>Moves</h3>
-                <ul>
-                  {pokemonMoves.slice(0, 4).map(pokemon => (
-                    <li
-                      key={pokemon.move.name}
-                      className='pokemonCard--moves-item'
-                    >
-                      <span className='pokemonCard--moves-title'>
-                        {pokemon.move.name}
-                      </span>
-                    </li>
+                <table className='pokemonCard--moves-item'>
+                  <tr>
+                    <th className='pokemonCard--moves-title'>Name</th>
+                    <th className='pokemonCard--moves-title'>Class</th>
+                    <th className='pokemonCard--moves-title'>Power</th>
+                    <th className='pokemonCard--moves-title'>Accuracy</th>
+                  </tr>
+                  {moves.map(move => (
+                    <tr key={move.name}>
+                      <td>{move.name}</td>
+                      <td>{move.damage_class}</td>
+                      <td>{move.power}</td>
+                      <td>{move.accuracy}</td>
+                    </tr>
                   ))}
-                </ul>
+                </table>
               </div>
             </div>
           </div>
