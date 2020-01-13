@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import Axios from "axios";
-import PokemonCard from "./pokemonCard";
-import Welcome from "./Welcome";
-import PokedexLeftHeader from "./PokedexLeftHeader";
+import React, { Component } from 'react';
+import Axios from 'axios';
+import PokemonCard from './pokemonCard';
+import Welcome from './Welcome';
+import PokedexLeftHeader from './PokedexLeftHeader';
+// import { connect } from "react-redux";
 // import PartyItem from "./PartyItem";
 
 class Pokedex extends Component {
@@ -19,13 +20,13 @@ class Pokedex extends Component {
     pokemonTypes: [],
     party: [],
     isInParty: false,
-    showPokemonCard: false
+    showPokemonCard: false,
   };
 
   componentDidMount() {
-    Axios.get("https://pokeapi.co/api/v2/pokemon?limit=151").then(response => {
+    Axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(response => {
       this.setState({
-        pokemons: response.data.results
+        pokemons: response.data.results,
       });
     });
   }
@@ -34,15 +35,16 @@ class Pokedex extends Component {
     Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(
       response => {
         const res = response.data;
+        const moves = res.moves.slice(0, 4);
         this.setState({
           pokemonID: res.id,
           pokemonName: res.name,
           pokemonAbilites: res.abilities,
-          pokemonMoves: res.moves,
+          pokemonMoves: moves,
           pokemonImages: res.sprites,
           pokemonStats: res.stats,
           pokemonTypes: res.types,
-          showPokemonCard: true
+          showPokemonCard: true,
         });
       }
     );
@@ -51,7 +53,7 @@ class Pokedex extends Component {
   addToParty = pokemon => {
     this.setState({
       ...this.state,
-      pokemon
+      pokemon,
     });
   };
 
@@ -66,16 +68,16 @@ class Pokedex extends Component {
       pokemonStats,
       pokemonTypes,
       Party,
-      isFavorited
+      isFavorited,
     } = this.state;
     return (
-      <div className="row">
-        <div className="col-6 remove-padding">
-          <div className="left-container">
-            <div className="left-container--border">
+      <div className='row'>
+        <div className='col-6 remove-padding'>
+          <div className='left-container'>
+            <div className='left-container--border'>
               <PokedexLeftHeader />
-              <div className="pokemonList--container__padding">
-                <div className="pokemonList--container">
+              <div className='pokemonList--container__padding'>
+                <div className='pokemonList--container'>
                   {pokemons.map(pokemon => (
                     <button
                       key={pokemon.name}
@@ -86,19 +88,19 @@ class Pokedex extends Component {
                   ))}
                 </div>
               </div>
-              <div className="favorites--container">
-                <div className="container">
-                  <div className="row">
-                    <p className="favorites--header">Party</p>
+              <div className='favorites--container'>
+                <div className='container'>
+                  <div className='row'>
+                    <p className='favorites--header'>Party</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="col-6 remove-padding">
-          <div className="right-container">
-            <div className="right-container--border">
+        <div className='col-6 remove-padding'>
+          <div className='right-container'>
+            <div className='right-container--border'>
               {this.state.showPokemonCard ? (
                 <PokemonCard
                   pokemonID={pokemonID}
@@ -122,5 +124,9 @@ class Pokedex extends Component {
     );
   }
 }
+
+// const mapStateToProps = () => {};
+
+// export default connect(mapStateToProps)(Pokedex);
 
 export default Pokedex;
