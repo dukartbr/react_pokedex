@@ -3,8 +3,8 @@ import Axios from 'axios';
 import PokemonCard from './pokemonCard';
 import Welcome from './Welcome';
 import PokedexLeftHeader from './PokedexLeftHeader';
+import PartyContainer from './PartyContainer';
 // import { connect } from "react-redux";
-// import PartyItem from "./PartyItem";
 
 class Pokedex extends Component {
   state = {
@@ -24,16 +24,24 @@ class Pokedex extends Component {
   };
 
   componentDidMount() {
-    Axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(response => {
-      this.setState({
-        pokemons: response.data.results,
+    this.getPokemon();
+  }
+
+  getPokemon() {
+    Axios.get('https://pokeapi.co/api/v2/pokemon?limit=151')
+      .then(response => {
+        this.setState({
+          pokemons: response.data.results,
+        });
+      })
+      .catch(e => {
+        console.log('handle error here: ', e.message);
       });
-    });
   }
 
   renderCard = pokemon => {
-    Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(
-      response => {
+    Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
+      .then(response => {
         const res = response.data;
         const moves = res.moves.slice(0, 4);
         this.setState({
@@ -46,15 +54,16 @@ class Pokedex extends Component {
           pokemonTypes: res.types,
           showPokemonCard: true,
         });
-      }
-    );
+      })
+      .catch(e => {
+        console.log('handle error here: ', e.message);
+      });
   };
 
-  addToParty = pokemon => {
-    this.setState({
-      ...this.state,
-      pokemon,
-    });
+  addToPartyHandler = pokemon => {
+    this.setState(prevState => ({
+      party: [...prevState.party, pokemon],
+    }));
   };
 
   render() {
@@ -67,8 +76,8 @@ class Pokedex extends Component {
       pokemonImages,
       pokemonStats,
       pokemonTypes,
-      Party,
       isFavorited,
+      party,
     } = this.state;
     return (
       <div className='row'>
@@ -91,7 +100,7 @@ class Pokedex extends Component {
               <div className='favorites--container'>
                 <div className='container'>
                   <div className='row'>
-                    <p className='favorites--header'>Party</p>
+                    <PartyContainer party={party} />
                   </div>
                 </div>
               </div>
@@ -110,9 +119,8 @@ class Pokedex extends Component {
                   pokemonImages={pokemonImages}
                   pokemonStats={pokemonStats}
                   pokemonTypes={pokemonTypes}
-                  party={Party}
                   isFavorited={isFavorited}
-                  FavoriteHandler={this.addToParty}
+                  PartyHandler={this.addToPartyHandler}
                 />
               ) : (
                 <Welcome />

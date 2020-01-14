@@ -4,26 +4,36 @@ import Axios from 'axios';
 class pokemonCard extends Component {
   state = {
     isFavorited: false,
-    isLoaded: false,
-    abilityDescriptions: [],
-    moves: [],
+    abilityDescriptions: {
+      abilities: [],
+      abilitiesLoaded: false,
+    },
+    moveStats: {
+      moves: [],
+      movesLoaded: false,
+    },
   };
 
   getAbilityDescriptions = pokemon => {
     pokemon.pokemonAbilites.map(pokemon => {
       const url = pokemon.ability.url;
-      Axios.get(`${url}`).then(response => {
-        const res = response.data.effect_entries[0].short_effect;
-        this.setState(prevState => ({
-          abilityDescriptions: [...prevState.abilityDescriptions, res],
-          // isLoaded: true,
-        }));
-      });
+      Axios.get(`${url}`)
+        .then(response => {
+          const res = response.data.effect_entries[0].short_effect;
+          this.setState(prevState => ({
+            abilityDescriptions: {
+              abilities: [...prevState.abilityDescriptions.abilities, res],
+              abilitiesLoaded: true,
+            },
+          }));
+        })
+        .catch(e => {
+          console.log('handle error here: ', e.message);
+        });
     });
   };
 
   getMoveStats = pokemon => {
-    console.log(pokemon);
     pokemon.pokemonMoves.map(move => {
       const url = move.move.url;
       const moveObject = {
@@ -32,19 +42,23 @@ class pokemonCard extends Component {
         accuracy: '',
         power: '',
       };
-      Axios.get(`${url}`).then(response => {
-        const res = response.data;
-        // console.log(response.data);
-        moveObject.name = res.name;
-        moveObject.damage_class = res.damage_class.name;
-        moveObject.accuracy = res.accuracy;
-        moveObject.power = res.power;
-        console.log(moveObject);
-        this.setState(prevState => ({
-          moves: [...prevState.moves, moveObject],
-          isLoaded: true,
-        }));
-      });
+      Axios.get(`${url}`)
+        .then(response => {
+          const res = response.data;
+          moveObject.name = res.name;
+          moveObject.damage_class = res.damage_class.name;
+          moveObject.accuracy = res.accuracy;
+          moveObject.power = res.power;
+          this.setState(prevState => ({
+            moveStats: {
+              moves: [...prevState.moveStats.moves, moveObject],
+              movesLoaded: true,
+            },
+          }));
+        })
+        .catch(e => {
+          console.log('handle error here: ', e.message);
+        });
     });
   };
 
@@ -56,14 +70,23 @@ class pokemonCard extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.pokemonName !== prevProps.pokemonName) {
       this.setState({
-        abilityDescriptions: [],
-        moves: [],
-        isLoaded: false,
+        abilityDescriptions: {
+          abilities: [],
+          abilitiesLoaded: false,
+        },
+        moveStats: {
+          moves: [],
+          movesLoaded: false,
+        },
       });
       this.getAbilityDescriptions(this.props);
       this.getMoveStats(this.props);
     }
   }
+
+  addToPartyHandler = pokemon => {
+    this.props.PartyHandler(pokemon);
+  };
 
   render() {
     const {
@@ -73,10 +96,10 @@ class pokemonCard extends Component {
       pokemonStats,
       pokemonTypes,
       pokemonID,
+      isFavorited,
     } = this.props;
-    const { abilityDescriptions, moves, isLoaded } = this.state;
-    // console.log('render', { props: this.props, state: this.state });
-    if (isLoaded) {
+    const { abilityDescriptions, moveStats } = this.state;
+    if (abilityDescriptions.abilitiesLoaded && moveStats.movesLoaded) {
       return (
         <div className='container'>
           <div className='pokemonCard--container'>
@@ -89,9 +112,9 @@ class pokemonCard extends Component {
               ))}
             </div>
             <div className='pokemonCard--screen'>
-              {pokemonName ? (
+              {!isFavorited ? (
                 <button
-                  onClick={() => this.toggleFavoritesHandler(this.props)}
+                  onClick={() => this.addToPartyHandler(this.props)}
                   className='pokemonCard--favorite'
                 >
                   <i className='fas fa-star'></i>
@@ -126,7 +149,8 @@ class pokemonCard extends Component {
                   {pokemonAbilites.map((pokemon, i) => {
                     return (
                       <li key={i}>
-                        {pokemon.ability.name} - {abilityDescriptions[i]}
+                        {pokemon.ability.name} -{' '}
+                        {abilityDescriptions.abilities[i]}
                       </li>
                     );
                   })}
@@ -137,20 +161,24 @@ class pokemonCard extends Component {
               <div className='pokemonCard--moves-container'>
                 <h3>Moves</h3>
                 <table className='pokemonCard--moves-item'>
-                  <tr>
-                    <th className='pokemonCard--moves-title'>Name</th>
-                    <th className='pokemonCard--moves-title'>Class</th>
-                    <th className='pokemonCard--moves-title'>Power</th>
-                    <th className='pokemonCard--moves-title'>Accuracy</th>
-                  </tr>
-                  {moves.map(move => (
-                    <tr key={move.name}>
-                      <td>{move.name}</td>
-                      <td>{move.damage_class}</td>
-                      <td>{move.power}</td>
-                      <td>{move.accuracy}</td>
+                  <thead>
+                    <tr>
+                      <th className='pokemonCard--moves-title'>Name</th>
+                      <th className='pokemonCard--moves-title'>Class</th>
+                      <th className='pokemonCard--moves-title'>Power</th>
+                      <th className='pokemonCard--moves-title'>Accuracy</th>
                     </tr>
-                  ))}
+                  </thead>
+                  <tbody>
+                    {moveStats.moves.map(move => (
+                      <tr key={move.name}>
+                        <td>{move.name}</td>
+                        <td>{move.damage_class}</td>
+                        <td>{move.power ? move.power : 'N/A'}</td>
+                        <td>{move.accuracy ? move.accuracy : 'N/A'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
                 </table>
               </div>
             </div>
