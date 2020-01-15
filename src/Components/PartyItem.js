@@ -1,16 +1,20 @@
 import React from 'react';
 
 const PartyItem = props => {
-  console.log(props.pokemon);
+  // function renderCardHandler(props) {
+  //   // console.log(props.pokemon);
+  //   console.log(props);
+  //   // props.renderCardHandler();
+  // }
   return (
     <div className='col-2'>
-      <div className='favorites--item-container'>
+      <button className='favorites--item-container'>
         <img
           className='favorites--item'
           src={props.pokemon.pokemonImages.front_default}
           alt={props.pokemon.pokemonName}
         />
-      </div>
+      </button>
     </div>
   );
 };
