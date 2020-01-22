@@ -8,7 +8,7 @@ function PartyContainer(props) {
   }
   const { party } = props;
   return (
-    <div>
+    <>
       <h2 className='favorites--header'>Party</h2>
       <div className='favorites--list row'>
         {party.map((pokemon, i) => (
@@ -19,7 +19,7 @@ function PartyContainer(props) {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
 export default PartyContainer;

@@ -15,7 +15,7 @@ class pokemonCard extends Component {
   };
 
   getAbilityDescriptions = pokemon => {
-    pokemon.pokemonAbilites.map(pokemon => {
+    pokemon.pokemonAbilites.forEach(pokemon => {
       const url = pokemon.ability.url;
       Axios.get(`${url}`)
         .then(response => {
@@ -34,7 +34,7 @@ class pokemonCard extends Component {
   };
 
   getMoveStats = pokemon => {
-    pokemon.pokemonMoves.map(move => {
+    pokemon.pokemonMoves.forEach(move => {
       const url = move.move.url;
       const moveObject = {
         name: '',

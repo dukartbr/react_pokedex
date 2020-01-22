@@ -22,7 +22,6 @@ class Pokedex extends Component {
     pokemonStats: [],
     pokemonTypes: [],
     party: [],
-    isInParty: false,
     showPokemonCard: false,
   };
 
@@ -91,7 +90,6 @@ class Pokedex extends Component {
       pokemonImages,
       pokemonStats,
       pokemonTypes,
-      isFavorited,
       party,
     } = this.state;
     return (
@@ -136,7 +134,6 @@ class Pokedex extends Component {
                     pokemonImages={pokemonImages}
                     pokemonStats={pokemonStats}
                     pokemonTypes={pokemonTypes}
-                    isFavorited={isFavorited}
                     PartyHandler={this.addToPartyHandler}
                   />
                 ) : (

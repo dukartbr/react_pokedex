@@ -1,6 +1,7 @@
 // Generations
-
-export const gen1 = '/api/v2/generation/1/';
-export const gen2 = '/api/v2/generation/2/';
-export const gen3 = '/api/v2/generation/3/';
-export const gen4 = '/api/v2/generation/4/';
+export const generations = {
+  gen1: 'https://pokeapi.co/api/v2/pokemon?limit=151',
+  gen2: 'https://pokeapi.co/api/v2/pokemon?limit=100&offset=151',
+  gen3: 'https://pokeapi.co/api/v2/pokemon?limit=135&offset=251',
+  gen4: 'https://pokeapi.co/api/v2/pokemon?limit=107&offset=386',
+};

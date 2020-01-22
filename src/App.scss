@@ -18,19 +18,40 @@ $DarkPurple: #4f045a;
   background-color: #f1f5e6;
   height: 150vh;
 }
-.pokedex--header {
-  h1 {
-    text-align: center;
-    font-family: 'Acme', sans-serif;
-    font-size: 60px;
-  }
-}
 
 .remove-padding {
   padding-right: 0px;
   padding-left: 0px;
 }
-
+.pokedex--container {
+  position: relative;
+  .generations-tab--container {
+    position: absolute;
+    z-index: 999;
+    left: -129px;
+    top: 70px;
+    .generations-tab--list-container {
+      position: relative;
+      .generations-tab--list-item {
+        list-style-type: none;
+        margin-top: 90px;
+        transform: rotate(-90deg);
+        padding: 5px 30px;
+        font-family: 'Acme', sans-serif;
+        background-color: $LightRed;
+        border-radius: 30px 30px 0px 0px;
+        ::active {
+          background-color: $DarkRed;
+        }
+        .generations-tab--list-button {
+          background-color: transparent;
+          border: none;
+          color: white;
+        }
+      }
+    }
+  }
+}
 .left-container {
   background-color: $DarkRed;
   border-radius: 50px 0px 0px 50px;
@@ -54,6 +75,15 @@ $DarkPurple: #4f045a;
       width: 107.8%;
       height: 100px;
       box-shadow: 1px 2px 5px $DarkPurple;
+      .pokedex--header {
+        padding-top: 5px;
+        h1 {
+          text-align: center;
+          font-family: 'Acme', sans-serif;
+          font-size: 60px;
+          color: white;
+        }
+      }
     }
     .pokemonList--container__padding {
       padding: 50px 10px;
@@ -98,9 +128,11 @@ $DarkPurple: #4f045a;
         font-family: 'Acme', sans-serif;
         width: 100%;
       }
-      .favorites--item-container {
-        width: 50px;
-        height: 50px;
+      .favorites--item-button {
+        width: 70px;
+        height: 70px;
+        margin-right: 5px;
+        margin-left: 5px;
         background: repeating-linear-gradient(
           45deg,
           #14daff,
@@ -108,7 +140,14 @@ $DarkPurple: #4f045a;
           #14eaff 80px,
           #14eaff 160px
         );
+        position: relative;
         border: 3px solid $Yellow;
+        .favorites--item {
+          position: absolute;
+          width: 70px;
+          top: 0px;
+          left: 0px;
+        }
       }
     }
   }
