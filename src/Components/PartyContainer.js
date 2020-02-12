@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Row, Header } from '../ui';
 import PartyItem from './PartyItem';
 
 function PartyContainer(props) {
@@ -9,8 +9,16 @@ function PartyContainer(props) {
   const { party } = props;
   return (
     <>
-      <h2 className='favorites--header'>Party</h2>
-      <div className='favorites--list row'>
+      <Header
+        textAlign='center'
+        color='white'
+        fontFamily='Acme'
+        fontSize='35px'
+        width='100%'
+      >
+        Party
+      </Header>
+      <Row>
         {party.map((pokemon, i) => (
           <PartyItem
             key={i}
@@ -18,7 +26,7 @@ function PartyContainer(props) {
             renderCardHandler={renderCardHandler}
           />
         ))}
-      </div>
+      </Row>
     </>
   );
 }

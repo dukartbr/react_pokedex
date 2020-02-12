@@ -1,4 +1,6 @@
 import React from 'react';
+import { Box, ListContainer, ListItem, Button, Colors } from '../ui';
+import { css } from 'emotion';
 
 function GenerationsTab(props) {
   const updateGenHandler = e => {
@@ -6,46 +8,122 @@ function GenerationsTab(props) {
   };
 
   return (
-    <div className='generations-tab--container'>
-      <ul className='generations-tab--list-container'>
-        <li className='generations-tab--list-item'>
-          <button
+    <Box position='absolute' zIndex='999' left='-129px' top='70px'>
+      <ListContainer position='relative'>
+        <ListItem
+          className={css`
+            list-style-type: none;
+            margin-top: 90px;
+            margin-left: -3px;
+            transform: rotate(-90deg);
+            padding: 5px 30px;
+            font-family: 'Acme', sans-serif;
+            background-color: ${Colors.LightRed};
+            border-radius: 30px 30px 0px 0px;
+            border: 2px solid ${Colors.DarkPurple};
+            ::active {
+              background-color: $DarkRed;
+            }
+          `}
+        >
+          <Button
             id='gen1'
-            className='generations-tab--list-button'
             onClick={updateGenHandler}
+            className={css`
+              background-color: transparent;
+              border: none;
+              color: white;
+            `}
           >
             Gen 1
-          </button>
-        </li>
-        <li className='generations-tab--list-item'>
-          <button
+          </Button>
+        </ListItem>
+        <ListItem
+          className={css`
+            list-style-type: none;
+            margin-top: 90px;
+            margin-left: -3px;
+            transform: rotate(-90deg);
+            padding: 5px 30px;
+            font-family: 'Acme', sans-serif;
+            background-color: ${Colors.LightRed};
+            border-radius: 30px 30px 0px 0px;
+            border: 2px solid ${Colors.DarkPurple};
+            ::active {
+              background-color: $DarkRed;
+            }
+          `}
+        >
+          <Button
             id='gen2'
-            className='generations-tab--list-button'
             onClick={updateGenHandler}
+            className={css`
+              background-color: transparent;
+              border: none;
+              color: white;
+            `}
           >
             Gen 2
-          </button>
-        </li>
-        <li className='generations-tab--list-item'>
-          <button
+          </Button>
+        </ListItem>
+        <ListItem
+          className={css`
+            list-style-type: none;
+            margin-top: 90px;
+            margin-left: -3px;
+            transform: rotate(-90deg);
+            padding: 5px 30px;
+            font-family: 'Acme', sans-serif;
+            background-color: ${Colors.LightRed};
+            border-radius: 30px 30px 0px 0px;
+            border: 2px solid ${Colors.DarkPurple};
+            ::active {
+              background-color: $DarkRed;
+            }
+          `}
+        >
+          <Button
             id='gen3'
-            className='generations-tab--list-button'
             onClick={updateGenHandler}
+            className={css`
+              background-color: transparent;
+              border: none;
+              color: white;
+            `}
           >
             Gen 3
-          </button>
-        </li>
-        <li className='generations-tab--list-item'>
-          <button
+          </Button>
+        </ListItem>
+        <ListItem
+          className={css`
+            list-style-type: none;
+            margin-top: 90px;
+            margin-left: -3px;
+            transform: rotate(-90deg);
+            padding: 5px 30px;
+            font-family: 'Acme', sans-serif;
+            background-color: ${Colors.LightRed};
+            border-radius: 30px 30px 0px 0px;
+            border: 2px solid ${Colors.DarkPurple};
+            ::active {
+              background-color: $DarkRed;
+            }
+          `}
+        >
+          <Button
             id='gen4'
-            className='generations-tab--list-button'
             onClick={updateGenHandler}
+            className={css`
+              background-color: transparent;
+              border: none;
+              color: white;
+            `}
           >
             Gen 4
-          </button>
-        </li>
-      </ul>
-    </div>
+          </Button>
+        </ListItem>
+      </ListContainer>
+    </Box>
   );
 }
 

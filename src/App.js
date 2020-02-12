@@ -1,19 +1,19 @@
 import React from 'react';
-import './App.scss';
 import Pokedex from './Components/pokedex';
-// import { Provider } from "react-redux";
-// import store from "./store";
+import { Box, Container } from './ui';
 
-function App() {
-  return (
-    // <Provider store={store}>
-    <div className='App'>
-      <div className='container'>
-        <Pokedex />
-      </div>
-    </div>
-    // </Provider>
-  );
-}
+const App = () => (
+  <Box
+    className='App'
+    style={{
+      backgroundColor: '#f1f5e6',
+      height: '150vh',
+    }}
+  >
+    <Container>
+      <Pokedex />
+    </Container>
+  </Box>
+);
 
 export default App;

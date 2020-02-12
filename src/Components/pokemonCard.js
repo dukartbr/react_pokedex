@@ -1,5 +1,23 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { css } from 'emotion';
+import {
+  Box,
+  Column,
+  Container,
+  Row,
+  Button,
+  SmallScreen,
+  Subheader,
+  Span,
+  Title,
+  Colors,
+  Image,
+  Icon,
+  ListContainer,
+  ListItem,
+} from '../ui';
+import MovesTable from '../Components/MovesTable';
 
 class pokemonCard extends Component {
   state = {
@@ -101,89 +119,127 @@ class pokemonCard extends Component {
     const { abilityDescriptions, moveStats } = this.state;
     if (abilityDescriptions.abilitiesLoaded && moveStats.movesLoaded) {
       return (
-        <div className='container'>
-          <div className='pokemonCard--container'>
-            <div className='pokemonCard--header'>
-              <h2>{pokemonName}</h2>
+        <Container>
+          <Box
+            p='30px 10px'
+            bg='#f1f5e6'
+            border='2px solid'
+            borderColor={Colors.DarkPurple}
+            borderRadius='15px'
+          >
+            <Box height='100px'>
+              <Subheader color='$DarkRed'>{pokemonName}</Subheader>
               {pokemonTypes.map(pokemon => (
-                <span className='pokemonCard--type' key={pokemon.type.name}>
-                  {pokemon.type.name}
-                </span>
-              ))}
-            </div>
-            <div className='pokemonCard--screen'>
-              {!isFavorited ? (
-                <button
-                  onClick={() => this.addToPartyHandler(this.props)}
-                  className='pokemonCard--favorite'
+                <Span
+                  key={pokemon.type.name}
+                  color='#000000'
+                  textAlign='center'
                 >
-                  <i className='fas fa-star'></i>
-                </button>
+                  {pokemon.type.name}
+                </Span>
+              ))}
+            </Box>
+            <SmallScreen
+              border='2px solid'
+              borderColor={Colors.DarkPurple}
+              borderRadius='15px'
+              height='250px'
+              display='block'
+              textAlign='center'
+              position='relative'
+            >
+              {!isFavorited ? (
+                <Button
+                  onClick={() => this.addToPartyHandler(this.props)}
+                  className={css`
+                    float: left;
+                    color: white;
+                    margin-top: 5px;
+                    margin-left: 5px;
+                    background-color: ${Colors.Orange};
+                    border: none;
+                    padding: 10px;
+                    border-radius: 15px;
+                  `}
+                >
+                  <Icon className='fas fa-star'></Icon>
+                </Button>
               ) : null}
-              <div className='row'>
-                <div className='col-3'>
-                  <img src={pokemonImages.front_default} alt='' />
-                </div>
-                <div className='col-8'>
-                  <div className='pokemonCard--stat-container'>
-                    <h3>Stats</h3>
-                    <ul>
+              <Row>
+                <Column width='20%'>
+                  <Image
+                    src={pokemonImages.front_default}
+                    alt=''
+                    width='200px'
+                  />
+                </Column>
+                <Column width='80%'>
+                  <Box padding='15px 20px'>
+                    <Title color='white'>Stats</Title>
+                    <ListContainer>
                       {pokemonStats.map(pokemon => (
-                        <li key={pokemon.stat.name}>
-                          {pokemon.stat.name} :{' '}
-                          <span className='pokemonCard--base-stat'>
-                            {pokemon.base_stat}
-                          </span>
-                        </li>
+                        <ListItem
+                          key={pokemon.stat.name}
+                          className={css`
+                            list-style-type: none;
+                            color: white;
+                            text-align: left;
+                            font-weight: bold;
+                            font-family: 'Asap', sans-serif;
+                            text-transform: uppercase;
+                          `}
+                        >
+                          <Span float='right'>
+                            {pokemon.stat.name}: {pokemon.base_stat}
+                          </Span>
+                        </ListItem>
                       ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <span className='pokemonCard--pokemonID'>ID: {pokemonID}</span>
-            </div>
-            <div className='row'>
-              <div className='col-12'>
-                <h3>Abilities</h3>
-                <ul>
+                    </ListContainer>
+                  </Box>
+                </Column>
+              </Row>
+              <Span
+                position='absolute'
+                bottom='5px'
+                right='5px'
+                color='black'
+                fontWeight='bold'
+              >
+                ID: {pokemonID}
+              </Span>
+            </SmallScreen>
+            <Row>
+              <Column width='100%'>
+                <Title>Abilities</Title>
+                <ListContainer>
                   {pokemonAbilites.map((pokemon, i) => {
                     return (
-                      <li key={i}>
+                      <ListItem key={i}>
                         {pokemon.ability.name} -{' '}
                         {abilityDescriptions.abilities[i]}
-                      </li>
+                      </ListItem>
                     );
                   })}
-                </ul>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='pokemonCard--moves-container'>
-                <h3>Moves</h3>
-                <table className='pokemonCard--moves-item'>
-                  <thead>
-                    <tr>
-                      <th className='pokemonCard--moves-title'>Name</th>
-                      <th className='pokemonCard--moves-title'>Class</th>
-                      <th className='pokemonCard--moves-title'>Power</th>
-                      <th className='pokemonCard--moves-title'>Accuracy</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {moveStats.moves.map(move => (
-                      <tr key={move.name}>
-                        <td>{move.name}</td>
-                        <td>{move.damage_class}</td>
-                        <td>{move.power ? move.power : 'N/A'}</td>
-                        <td>{move.accuracy ? move.accuracy : 'N/A'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+                </ListContainer>
+              </Column>
+            </Row>
+            <Row>
+              <Box
+                width='80%'
+                mr='10%'
+                ml='10%'
+                background={Colors.Yellow}
+                border='3px solid'
+                borderColor={Colors.Orange}
+                p='20px 0px'
+                borderRadius='30px'
+              >
+                <Title>Moves</Title>
+                <MovesTable moveStats={moveStats} />
+              </Box>
+            </Row>
+          </Box>
+        </Container>
       );
     } else return null;
   }

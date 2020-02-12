@@ -1,12 +1,15 @@
 import React from 'react';
+import { Span, Header } from '../ui';
 
 const Welcome = () => {
-    return (
-        <div className="welcome--container">
-            <h1>Welcome!</h1>
-            <span className="welcome--description">This is a React based Pokedex using the PokeAPI</span>
-        </div>
-    );
+  return (
+    <>
+      <Header>Welcome</Header>
+      <Span textAlign='center' color='#ffffff'>
+        This is a React based Pokedex using the PokeAPI
+      </Span>
+    </>
+  );
 };
 
 export default Welcome;

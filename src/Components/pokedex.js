@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { Box, Column, Container, Row, Panel, LargeScreen } from '../ui';
 import { generations } from '../api';
 import PokemonCard from './pokemonCard';
+import PokemonButton from './PokemonButton';
 import Welcome from './Welcome';
 import PokedexLeftHeader from './PokedexLeftHeader';
 import PartyContainer from './PartyContainer';
 import GenerationsTab from './GenerationsTab';
-// import { connect } from "react-redux";
 
 class Pokedex extends Component {
   state = {
@@ -45,6 +46,7 @@ class Pokedex extends Component {
   renderCard = pokemon => {
     Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
       .then(response => {
+        console.log(response);
         const res = response.data;
         const moves = res.moves.slice(0, 4);
         this.setState({
@@ -93,57 +95,67 @@ class Pokedex extends Component {
       party,
     } = this.state;
     return (
-      <div className='pokedex--container'>
+      <Box position='relative' pt='3rem' pb='3rem'>
         <GenerationsTab updateGeneration={this.updateGeneration} />
-        <div className='row'>
-          <div className='col-6 remove-padding'>
-            <div className='left-container'>
-              <div className='left-container--border'>
+        <Row>
+          <Column width='50%' p='0'>
+            <Panel borderRadius='50px 0px 0px 50px'>
+              <Box
+                position='relative'
+                p='20px'
+                border='3px solid #4f045a'
+                borderRaidus='30px 0px 0px 15px'
+                height='950px'
+              >
                 <PokedexLeftHeader />
-                <div className='pokemonList--container__padding'>
-                  <div className='pokemonList--container'>
+                <Box
+                  p='50px 10px'
+                  bg='#f1f5e6'
+                  border='2px solid #4f045a'
+                  borderRadius='30px'
+                  mt='110px'
+                >
+                  <LargeScreen overflow='scroll' height='400px'>
                     {pokemons.map(pokemon => (
-                      <button
+                      <PokemonButton
                         key={pokemon.name}
-                        onClick={() => this.renderCard(pokemon)}
-                      >
-                        {pokemon.name}
-                      </button>
+                        name={pokemon.name}
+                        renderCard={this.renderCard}
+                        pokemon={pokemon}
+                      />
                     ))}
-                  </div>
-                </div>
-                <div className='favorites--container'>
-                  <div className='container'>
-                    <div className='row'>
+                  </LargeScreen>
+                </Box>
+                <Box padding='15px 0px'>
+                  <Container>
+                    <Row>
                       <PartyContainer party={party} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='col-6 remove-padding'>
-            <div className='right-container'>
-              <div className='right-container--border'>
-                {this.state.showPokemonCard ? (
-                  <PokemonCard
-                    pokemonID={pokemonID}
-                    pokemonName={pokemonName}
-                    pokemonAbilites={pokemonAbilites}
-                    pokemonMoves={pokemonMoves}
-                    pokemonImages={pokemonImages}
-                    pokemonStats={pokemonStats}
-                    pokemonTypes={pokemonTypes}
-                    PartyHandler={this.addToPartyHandler}
-                  />
-                ) : (
-                  <Welcome />
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                    </Row>
+                  </Container>
+                </Box>
+              </Box>
+            </Panel>
+          </Column>
+          <Column width='50%' p='0'>
+            <Panel borderRadius='0px 50px 50px 0px'>
+              {this.state.showPokemonCard ? (
+                <PokemonCard
+                  pokemonID={pokemonID}
+                  pokemonName={pokemonName}
+                  pokemonAbilites={pokemonAbilites}
+                  pokemonMoves={pokemonMoves}
+                  pokemonImages={pokemonImages}
+                  pokemonStats={pokemonStats}
+                  pokemonTypes={pokemonTypes}
+                  PartyHandler={this.addToPartyHandler}
+                />
+              ) : (
+                <Welcome />
+              )}
+            </Panel>
+          </Column>
+        </Row>
+      </Box>
     );
   }
 }
