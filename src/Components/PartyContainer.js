@@ -2,11 +2,11 @@ import React from 'react';
 import { Row, Header } from '../ui';
 import PartyItem from './PartyItem';
 
-function PartyContainer(props) {
+const PartyContainer = ({ party }) => {
   function renderCardHandler(pokemon) {
     console.log(pokemon);
   }
-  const { party } = props;
+
   return (
     <>
       <Header
@@ -29,5 +29,5 @@ function PartyContainer(props) {
       </Row>
     </>
   );
-}
+};
 export default PartyContainer;

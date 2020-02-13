@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, SmallScreen, Image } from '../ui';
 
-const PartyItem = props => {
+const PartyItem = ({ pokemon }) => {
+  console.log(pokemon);
   return (
     <Box p='15px 0px'>
       <SmallScreen
@@ -14,8 +15,8 @@ const PartyItem = props => {
       >
         <Image
           className='favorites--item'
-          src={props.pokemon.pokemonImages.front_default}
-          alt={props.pokemon.pokemonName}
+          src={pokemon.images.front_default}
+          alt={pokemon.pokemonName}
           style={{
             position: 'absolute',
             width: '70px',

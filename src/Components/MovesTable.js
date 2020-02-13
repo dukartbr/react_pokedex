@@ -8,33 +8,37 @@ import {
   TableBody,
 } from '../ui';
 
-const MovesTable = ({ moveStats }) => (
-  <Table>
-    <TableHead>
-      <TableRow>
-        <TableHeadData className='pokemonCard--moves-title'>Name</TableHeadData>
-        <TableHeadData className='pokemonCard--moves-title'>
-          Class
-        </TableHeadData>
-        <TableHeadData className='pokemonCard--moves-title'>
-          Power
-        </TableHeadData>
-        <TableHeadData className='pokemonCard--moves-title'>
-          Accuracy
-        </TableHeadData>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {moveStats.moves.map(move => (
-        <TableRow key={move.name}>
-          <TableData>{move.name}</TableData>
-          <TableData>{move.damage_class}</TableData>
-          <TableData>{move.power ? move.power : 'N/A'}</TableData>
-          <TableData>{move.accuracy ? move.accuracy : 'N/A'}</TableData>
+const MovesTable = ({ moveStats }) => {
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeadData className='pokemonCard--moves-title'>
+            Name
+          </TableHeadData>
+          <TableHeadData className='pokemonCard--moves-title'>
+            Class
+          </TableHeadData>
+          <TableHeadData className='pokemonCard--moves-title'>
+            Power
+          </TableHeadData>
+          <TableHeadData className='pokemonCard--moves-title'>
+            Accuracy
+          </TableHeadData>
         </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-);
+      </TableHead>
+      <TableBody>
+        {moveStats.map((move, i) => (
+          <TableRow key={i}>
+            <TableData>{move.name}</TableData>
+            <TableData>{move.damage_class}</TableData>
+            <TableData>{move.power ? move.power : 'N/A'}</TableData>
+            <TableData>{move.accuracy ? move.accuracy : 'N/A'}</TableData>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
 
 export default MovesTable;
