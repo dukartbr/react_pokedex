@@ -20,7 +20,7 @@ import {
 import MovesTable from '../Components/MovesTable';
 
 const PokemonCard = ({ pokemonObj, partyHandler }) => {
-  const { id, name, abilities, moves, images, stats, types } = pokemonObj;
+  const { id, name, abilities, images, stats, types } = pokemonObj;
   let [abilityDescriptions, setAbilityDescriptions] = React.useState([]);
   let [moveStats, setMoveStats] = React.useState([]);
 
@@ -38,6 +38,10 @@ const PokemonCard = ({ pokemonObj, partyHandler }) => {
           console.log('handle error here', e.message);
         });
     });
+  }, [abilities]);
+
+  React.useEffect(() => {
+    const { moves } = pokemonObj;
     moves.forEach(move => {
       const url = move.move.url;
       const moveObj = {
@@ -59,7 +63,7 @@ const PokemonCard = ({ pokemonObj, partyHandler }) => {
           console.log('handle error here: ', e.message);
         });
     });
-  }, [abilities, moves]);
+  }, [pokemonObj]);
 
   React.useEffect(() => {
     setAbilityDescriptions([]);
@@ -167,6 +171,7 @@ const PokemonCard = ({ pokemonObj, partyHandler }) => {
           <Box
             mr='10%'
             ml='10%'
+            width='80%'
             background={Colors.Yellow}
             border='3px solid'
             borderColor={Colors.Orange}
