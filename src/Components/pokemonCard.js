@@ -19,60 +19,51 @@ import {
 } from '../ui';
 import MovesTable from '../Components/MovesTable';
 
-const PokemonCard = ({ pokemonObj, partyHandler }) => {
+const PokemonCard = ({ pokemonObj, party, partyHandler, isInParty }) => {
   const { id, name, abilities, images, stats, types } = pokemonObj;
   let [abilityDescriptions, setAbilityDescriptions] = React.useState([]);
   let [moveStats, setMoveStats] = React.useState([]);
 
   React.useEffect(() => {
-    abilities.forEach(ability => {
-      Axios.get(ability.ability.url)
-        .then(response => {
-          const res = response.data.effect_entries[0].short_effect;
-          setAbilityDescriptions(abilityDescriptions => [
-            ...abilityDescriptions,
-            res,
-          ]);
-        })
-        .catch(e => {
-          console.log('handle error here', e.message);
-        });
+    Promise.all(
+      abilities.map(ability => {
+        return Axios.get(ability.ability.url);
+      })
+    ).then(values => {
+      setAbilityDescriptions(
+        values.map(value => value.data.effect_entries[0].short_effect)
+      );
     });
   }, [abilities]);
 
   React.useEffect(() => {
     const { moves } = pokemonObj;
-    moves.forEach(move => {
-      const url = move.move.url;
-      const moveObj = {
-        name: '',
-        damage_class: '',
-        accuracy: '',
-        power: '',
-      };
-      Axios.get(`${url}`)
-        .then(response => {
-          const res = response.data;
-          moveObj.name = res.name;
-          moveObj.damage_class = res.damage_class.name;
-          moveObj.accuracy = res.accuracy;
-          moveObj.power = res.power;
-          setMoveStats(moveStats => [...moveStats, moveObj]);
-        })
-        .catch(e => {
-          console.log('handle error here: ', e.message);
-        });
+    if (moveStats.length > 0) return;
+    Promise.all(
+      moves.slice(0, 4).map(move => {
+        return Axios.get(move.move.url);
+      })
+    ).then(values => {
+      setMoveStats(
+        values.map(value => ({
+          name: value.data.name,
+          damage_class: value.data.damage_class.name,
+          accuracy: value.data.accuracy,
+          power: value.data.power,
+        }))
+      );
     });
-  }, [pokemonObj]);
+  }, [pokemonObj, moveStats]);
 
   React.useEffect(() => {
     setAbilityDescriptions([]);
     setMoveStats([]);
   }, [id]);
 
-  const addToPartyHandler = pokemon => {
+  const togglePartyHandler = pokemon => {
     partyHandler(pokemon);
   };
+
   return (
     <Container>
       <Box
@@ -100,7 +91,7 @@ const PokemonCard = ({ pokemonObj, partyHandler }) => {
           position='relative'
         >
           <Button
-            onClick={() => addToPartyHandler(pokemonObj)}
+            onClick={() => togglePartyHandler(pokemonObj)}
             className={css`
               float: left;
               color: white;
@@ -110,9 +101,16 @@ const PokemonCard = ({ pokemonObj, partyHandler }) => {
               border: none;
               padding: 10px;
               border-radius: 15px;
+              &:disabled {
+                background-color: gray;
+              }
             `}
           >
-            <Icon className='fas fa-star'></Icon>
+            {isInParty ? (
+              <Icon className='fas fa-trash'></Icon>
+            ) : (
+              <Icon className='fas fa-star'></Icon>
+            )}
           </Button>
           <Row>
             <Column width='40%'>

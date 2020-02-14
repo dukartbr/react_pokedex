@@ -2,10 +2,10 @@ import React from 'react';
 import { Row, Header } from '../ui';
 import PartyItem from './PartyItem';
 
-const PartyContainer = ({ party }) => {
-  function renderCardHandler(pokemon) {
-    console.log(pokemon);
-  }
+const PartyContainer = ({ party, renderPartyCard }) => {
+  const renderCardHandler = pokemon => {
+    renderPartyCard(pokemon);
+  };
 
   return (
     <>

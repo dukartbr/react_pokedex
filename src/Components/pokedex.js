@@ -23,28 +23,38 @@ const Pokedex = () => {
   });
   let [displayCard, setDisplayCard] = React.useState(false);
   let [party, setParty] = React.useState([]);
+  let isInParty = party.find(p => p.id === pokemonObj.id);
 
   React.useEffect(() => {
-    setGeneration();
     getPokemon(generation);
   }, [generation]);
 
   const getPokemon = gen => {
-    Axios.get(generations[gen])
-      .then(response => {
+    Axios.get(generations[gen]).then(
+      response => {
         setPokemons(response.data.results);
-      })
-      .catch(e => {
+      },
+      e => {
         console.log('handle error here: ', e.message);
-      });
+      }
+    );
   };
 
   const updateGeneration = gen => {
     setGeneration(gen);
   };
 
-  const addToPartyHandler = pokemon => {
-    setParty(party => [...party, pokemon]);
+  const togglePartyHandler = pokemon => {
+    console.log('partylength', party.length);
+    if (party.length <= 5) {
+      if (!isInParty) {
+        setParty(party => [...party, pokemon]);
+      } else if (isInParty) {
+        setParty(party.filter(p => p.id !== pokemon.id));
+      }
+    } else {
+      alert('You may only have up to 6 Pokemon in your party');
+    }
   };
 
   const renderCard = pokemon => {
@@ -66,6 +76,10 @@ const Pokedex = () => {
       .catch(e => {
         console.log('handle error here: ', e.message);
       });
+  };
+
+  const renderPartyCard = pokemon => {
+    renderCard(pokemon);
   };
 
   return (
@@ -103,7 +117,10 @@ const Pokedex = () => {
               <Box padding='15px 0px'>
                 <Container>
                   <Row>
-                    <PartyContainer party={party} />
+                    <PartyContainer
+                      party={party}
+                      renderPartyCard={renderPartyCard}
+                    />
                   </Row>
                 </Container>
               </Box>
@@ -115,7 +132,9 @@ const Pokedex = () => {
             {displayCard ? (
               <PokemonCard
                 pokemonObj={pokemonObj}
-                partyHandler={addToPartyHandler}
+                party={party}
+                partyHandler={togglePartyHandler}
+                isInParty={isInParty}
               />
             ) : (
               <Welcome />

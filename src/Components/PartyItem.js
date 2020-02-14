@@ -1,10 +1,16 @@
 import React from 'react';
+import { css } from 'emotion';
 import { Box, SmallScreen, Image, Button } from '../ui';
 
-const PartyItem = ({ pokemon }) => {
-  console.log(pokemon);
+const PartyItem = ({ pokemon, renderCardHandler }) => {
   return (
-    <Button>
+    <Button
+      className={css`
+        background: transparent;
+        border: none;
+      `}
+      onClick={() => renderCardHandler(pokemon)}
+    >
       <Box p='15px 0px'>
         <SmallScreen
           border='3px solid #faf139'
