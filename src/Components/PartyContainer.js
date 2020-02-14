@@ -16,7 +16,7 @@ const PartyContainer = ({ party, renderPartyCard }) => {
         fontSize='35px'
         width='100%'
       >
-        Party
+        Party [{party.length} / 5]
       </Header>
       <Row>
         {party.map((pokemon, i) => (

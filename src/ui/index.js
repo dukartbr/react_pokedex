@@ -143,9 +143,17 @@ export const LargeScreen = styled(Box)`
   border: 2px solid ${Colors.DarkPurple};
 `;
 
-// export const Button = styled('button')`
-//   background: red;
-// `;
+export const SearchInput = styled.input`
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: none;
+  font-family: 'Acme';
+  color: ${Colors.DarkPurple};
+  border-bottom: 2px solid ${Colors.DarkPurple};
+`;
 
 export const Button = styled.button``;
 

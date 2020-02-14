@@ -8,6 +8,7 @@ import Welcome from './Welcome';
 import PokedexLeftHeader from './PokedexLeftHeader';
 import PartyContainer from './PartyContainer';
 import GenerationsTab from './GenerationsTab';
+import SearchBar from './SearchBar';
 
 const Pokedex = () => {
   let [generation, setGeneration] = React.useState('gen1');
@@ -22,6 +23,7 @@ const Pokedex = () => {
     types: [],
   });
   let [displayCard, setDisplayCard] = React.useState(false);
+  let [searchQuery, setSearchQuery] = React.useState('');
   let [party, setParty] = React.useState([]);
   let isInParty = party.find(p => p.id === pokemonObj.id);
 
@@ -46,14 +48,14 @@ const Pokedex = () => {
 
   const togglePartyHandler = pokemon => {
     console.log('partylength', party.length);
-    if (party.length <= 5) {
-      if (!isInParty) {
+    if (!isInParty) {
+      if (party.length <= 4) {
         setParty(party => [...party, pokemon]);
-      } else if (isInParty) {
-        setParty(party.filter(p => p.id !== pokemon.id));
+      } else {
+        alert('You may only have up to 5 Pokemon in your party');
       }
-    } else {
-      alert('You may only have up to 6 Pokemon in your party');
+    } else if (isInParty) {
+      setParty(party.filter(p => p.id !== pokemon.id));
     }
   };
 
@@ -82,6 +84,13 @@ const Pokedex = () => {
     renderCard(pokemon);
   };
 
+  const filteredPokemon = (pokemonList, query) => {
+    if (!query) return pokemonList;
+    return pokemonList.filter(
+      p => p.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
+  };
+
   return (
     <Box position='relative' pt='3rem' pb='3rem'>
       <GenerationsTab updateGeneration={updateGeneration} />
@@ -103,15 +112,32 @@ const Pokedex = () => {
                 borderRadius='30px'
                 mt='110px'
               >
+                <SearchBar
+                  setSearchQuery={setSearchQuery}
+                  searchQuery={searchQuery}
+                />
                 <LargeScreen overflow='scroll' height='400px'>
-                  {pokemons.map(pokemon => (
-                    <PokemonButton
-                      key={pokemon.name}
-                      name={pokemon.name}
-                      renderCard={renderCard}
-                      pokemon={pokemon}
-                    />
-                  ))}
+                  {filteredPokemon(pokemons, searchQuery).length !== 0 ? (
+                    filteredPokemon(pokemons, searchQuery).map(pokemon => (
+                      <PokemonButton
+                        key={pokemon.name}
+                        name={pokemon.name}
+                        renderCard={renderCard}
+                        pokemon={pokemon}
+                      />
+                    ))
+                  ) : (
+                    <Box
+                      width='100%'
+                      textAlign='center'
+                      color='white'
+                      fontSize='3rem'
+                      fontFamily='Acme'
+                      mt='6rem'
+                    >
+                      No Results!
+                    </Box>
+                  )}
                 </LargeScreen>
               </Box>
               <Box padding='15px 0px'>
