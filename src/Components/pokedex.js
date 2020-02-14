@@ -29,6 +29,10 @@ const Pokedex = () => {
 
   React.useEffect(() => {
     getPokemon(generation);
+    const localStorageRef = localStorage.getItem('party');
+    if (localStorageRef) {
+      setParty(JSON.parse(localStorageRef));
+    }
   }, [generation]);
 
   const getPokemon = gen => {
@@ -47,7 +51,6 @@ const Pokedex = () => {
   };
 
   const togglePartyHandler = pokemon => {
-    console.log('partylength', party.length);
     if (!isInParty) {
       if (party.length <= 4) {
         setParty(party => [...party, pokemon]);
@@ -57,7 +60,12 @@ const Pokedex = () => {
     } else if (isInParty) {
       setParty(party.filter(p => p.id !== pokemon.id));
     }
+    console.log('party', party);
   };
+
+  React.useEffect(() => {
+    localStorage.setItem(`party`, JSON.stringify(party));
+  }, [party]);
 
   const renderCard = pokemon => {
     Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
