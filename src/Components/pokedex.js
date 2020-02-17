@@ -51,16 +51,24 @@ const Pokedex = () => {
   };
 
   const togglePartyHandler = pokemon => {
+    // const sortedById = [...party].sort((a, b) => {
+    //   return a.id - b.id;
+    // });
     if (!isInParty) {
       if (party.length <= 4) {
-        setParty(party => [...party, pokemon]);
+        setParty(party =>
+          [...party, pokemon].sort((a, b) => {
+            return a.id - b.id;
+          })
+        );
       } else {
         alert('You may only have up to 5 Pokemon in your party');
       }
     } else if (isInParty) {
       setParty(party.filter(p => p.id !== pokemon.id));
     }
-    console.log('party', party);
+
+    // s
   };
 
   React.useEffect(() => {
