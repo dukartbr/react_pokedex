@@ -9,6 +9,7 @@ import PokedexLeftHeader from './PokedexLeftHeader';
 import PartyContainer from './PartyContainer';
 import GenerationsTab from './GenerationsTab';
 import SearchBar from './SearchBar';
+import BattleButton from './BattleButton';
 
 const Pokedex = () => {
   let [generation, setGeneration] = React.useState('gen1');
@@ -51,9 +52,6 @@ const Pokedex = () => {
   };
 
   const togglePartyHandler = pokemon => {
-    // const sortedById = [...party].sort((a, b) => {
-    //   return a.id - b.id;
-    // });
     if (!isInParty) {
       if (party.length <= 4) {
         setParty(party =>
@@ -67,8 +65,6 @@ const Pokedex = () => {
     } else if (isInParty) {
       setParty(party.filter(p => p.id !== pokemon.id));
     }
-
-    // s
   };
 
   React.useEffect(() => {
@@ -170,7 +166,7 @@ const Pokedex = () => {
           </Panel>
         </Column>
         <Column width='50%' p='0'>
-          <Panel borderRadius='0px 50px 50px 0px'>
+          <Panel borderRadius='0px 50px 50px 0px' position='relative'>
             {displayCard ? (
               <PokemonCard
                 pokemonObj={pokemonObj}
@@ -181,6 +177,7 @@ const Pokedex = () => {
             ) : (
               <Welcome />
             )}
+            <BattleButton party={party} />
           </Panel>
         </Column>
       </Row>
