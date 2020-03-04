@@ -87,6 +87,13 @@ export const Row = styled(Box)({
   marginLeft: '-15px;',
 });
 
+export const NoMarginRow = styled(Box)({
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginRight: '0px',
+  marginLeft: '0px',
+});
+
 export const Column = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
@@ -186,3 +193,5 @@ export const TableHead = styled.thead``;
 export const TableRow = styled.tr``;
 
 export const TableBody = styled.tbody``;
+
+export const Strong = styled.strong``;

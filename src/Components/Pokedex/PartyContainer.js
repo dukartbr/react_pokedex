@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Header } from '../ui';
+import { Row, Header } from '../../ui';
 import PartyItem from './PartyItem';
 
 const PartyContainer = ({ party, renderPartyCard }) => {
@@ -16,7 +16,7 @@ const PartyContainer = ({ party, renderPartyCard }) => {
         fontSize='35px'
         width='100%'
       >
-        Party [{party.length} / 5]
+        Party
       </Header>
       <Row>
         {party.map((pokemon, i) => (

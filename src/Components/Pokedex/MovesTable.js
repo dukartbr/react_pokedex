@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
   TableBody,
-} from '../ui';
+} from '../../ui';
 
 const MovesTable = ({ moveStats }) => {
   return (

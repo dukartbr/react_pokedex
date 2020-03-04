@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, SearchInput, Icon, Colors } from '../ui';
+import { Box, SearchInput, Icon, Colors } from '../../ui';
 
 const SearchBar = ({ setSearchQuery, searchQuery }) => {
   return (

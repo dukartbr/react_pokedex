@@ -16,11 +16,11 @@ import {
   Icon,
   ListContainer,
   ListItem,
-} from '../ui';
-import MovesTable from '../Components/MovesTable';
+} from '../../ui';
+import MovesTable from './MovesTable';
 
-const PokemonCard = ({ pokemonObj, party, partyHandler, isInParty }) => {
-  const { id, name, abilities, images, stats, types } = pokemonObj;
+const PokemonCard = ({ currentPokemon, party, partyHandler, isInParty }) => {
+  const { id, name, abilities, images, stats, types } = currentPokemon;
   let [abilityDescriptions, setAbilityDescriptions] = React.useState([]);
   let [moveStats, setMoveStats] = React.useState([]);
 
@@ -37,7 +37,7 @@ const PokemonCard = ({ pokemonObj, party, partyHandler, isInParty }) => {
   }, [abilities]);
 
   React.useEffect(() => {
-    const { moves } = pokemonObj;
+    const { moves } = currentPokemon;
     if (moveStats.length > 0) return;
     Promise.all(
       moves.slice(0, 4).map(move => {
@@ -53,7 +53,7 @@ const PokemonCard = ({ pokemonObj, party, partyHandler, isInParty }) => {
         }))
       );
     });
-  }, [pokemonObj, moveStats]);
+  }, [currentPokemon, moveStats]);
 
   React.useEffect(() => {
     setAbilityDescriptions([]);
@@ -91,7 +91,7 @@ const PokemonCard = ({ pokemonObj, party, partyHandler, isInParty }) => {
           position='relative'
         >
           <Button
-            onClick={() => togglePartyHandler(pokemonObj)}
+            onClick={() => togglePartyHandler(currentPokemon)}
             className={css`
               float: left;
               color: white;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Span, Header } from '../ui';
+import { Span, Header } from '../../ui';
 
 const Welcome = () => {
   return (

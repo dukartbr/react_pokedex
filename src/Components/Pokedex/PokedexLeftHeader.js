@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '../ui';
+import { Box } from '../../ui';
 
 const PokedexLeftHeader = () => {
   return (

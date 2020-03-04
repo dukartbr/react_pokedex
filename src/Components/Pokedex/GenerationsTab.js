@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, ListContainer, ListItem, Button, Colors } from '../ui';
+import { Box, ListContainer, ListItem, Button, Colors } from '../../ui';
 import { css } from 'emotion';
 
 function GenerationsTab(props) {

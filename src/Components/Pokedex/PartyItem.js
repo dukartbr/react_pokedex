@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Box, SmallScreen, Image, Button } from '../ui';
+import { Box, SmallScreen, Image, Button } from '../../ui';
 
 const PartyItem = ({ pokemon, renderCardHandler }) => {
   return (
