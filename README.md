@@ -1,4 +1,4 @@
-Pokedex built with CRA and the [pokemonAPI](https://pokeapi.co/)
+Pokedex built with CRA and the [Poke API](https://pokeapi.co/)
 
 ![](screenshot.png)
 
