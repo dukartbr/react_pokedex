@@ -36,7 +36,7 @@ const Pokedex = () => {
   });
   let [displayCard, setDisplayCard] = React.useState(false);
   let [searchQuery, setSearchQuery] = React.useState('');
-  const isInParty = party.find(p => p.id === currentPokemon.id);
+  const isInParty = party.find((p) => p.id === currentPokemon.id);
 
   React.useEffect(() => {
     getPokemon(generation);
@@ -46,22 +46,22 @@ const Pokedex = () => {
     }
   }, [generation]);
 
-  const getPokemon = gen => {
+  const getPokemon = (gen) => {
     Axios.get(generations[gen]).then(
-      response => {
+      (response) => {
         setPokemons(response.data.results);
       },
-      e => {
+      (e) => {
         console.log('handle error here: ', e.message);
       }
     );
   };
 
-  const updateGeneration = gen => {
+  const updateGeneration = (gen) => {
     setGeneration(gen);
   };
 
-  const togglePartyHandler = pokemon => {
+  const togglePartyHandler = (pokemon) => {
     if (!isInParty) {
       if (party.length <= 4) {
         addPokemonToParty(pokemon);
@@ -77,9 +77,9 @@ const Pokedex = () => {
     localStorage.setItem(`party`, JSON.stringify(party));
   }, [party]);
 
-  const renderCard = pokemon => {
+  const renderCard = (pokemon) => {
     Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-      .then(response => {
+      .then((response) => {
         const res = response.data;
         const moves = res.moves.slice(0, 4);
         setcurrentPokemon({
@@ -93,19 +93,19 @@ const Pokedex = () => {
         });
         setDisplayCard(true);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('handle error here: ', e.message);
       });
   };
 
-  const renderPartyCard = pokemon => {
+  const renderPartyCard = (pokemon) => {
     renderCard(pokemon);
   };
 
   const filteredPokemon = (pokemonList, query) => {
     if (!query) return pokemonList;
     return pokemonList.filter(
-      p => p.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      (p) => p.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   };
 
@@ -137,7 +137,7 @@ const Pokedex = () => {
                   />
                   <LargeScreen overflow='scroll' height='400px'>
                     {filteredPokemon(pokemons, searchQuery).length !== 0 ? (
-                      filteredPokemon(pokemons, searchQuery).map(pokemon => (
+                      filteredPokemon(pokemons, searchQuery).map((pokemon) => (
                         <PokemonButton
                           key={pokemon.name}
                           name={pokemon.name}
@@ -184,25 +184,25 @@ const Pokedex = () => {
               ) : (
                 <Welcome />
               )}
-              {party.length >= 5 ? (
+              {/* {party.length >= 5 ? (
                 <BattleButton party={party} />
-              ) : (
-                <Box
-                  textAlign='center'
-                  color='white'
-                  fontFamily='Acme'
-                  fontSize='35px'
-                  position='absolute'
-                  bottom='20px'
-                  left='0px'
-                  right='0px'
-                  ml='25%'
-                  mr='25%'
-                  width='50%'
-                >
-                  Party [{party.length} / 5]
-                </Box>
-              )}
+              ) : ( */}
+              <Box
+                textAlign='center'
+                color='white'
+                fontFamily='Acme'
+                fontSize='35px'
+                position='absolute'
+                bottom='20px'
+                left='0px'
+                right='0px'
+                ml='25%'
+                mr='25%'
+                width='50%'
+              >
+                Party [{party.length} / 5]
+              </Box>
+              {/* )} */}
             </Panel>
           </Column>
         </Row>
