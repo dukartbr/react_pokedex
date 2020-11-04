@@ -14,7 +14,6 @@ import PokedexLeftHeader from './PokedexLeftHeader';
 import PartyContainer from './PartyContainer';
 import GenerationsTab from './GenerationsTab';
 import SearchBar from './SearchBar';
-import BattleButton from './BattleButton';
 
 const Pokedex = () => {
   const {
@@ -184,9 +183,6 @@ const Pokedex = () => {
               ) : (
                 <Welcome />
               )}
-              {/* {party.length >= 5 ? (
-                <BattleButton party={party} />
-              ) : ( */}
               <Box
                 textAlign='center'
                 color='white'
@@ -202,7 +198,6 @@ const Pokedex = () => {
               >
                 Party [{party.length} / 5]
               </Box>
-              {/* )} */}
             </Panel>
           </Column>
         </Row>
