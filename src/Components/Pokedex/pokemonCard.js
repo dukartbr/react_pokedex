@@ -19,19 +19,19 @@ import {
 } from '../../ui';
 import MovesTable from './MovesTable';
 
-const PokemonCard = ({ currentPokemon, party, partyHandler, isInParty }) => {
+const PokemonCard = ({ currentPokemon, partyHandler, isInParty }) => {
   const { id, name, abilities, images, stats, types } = currentPokemon;
   let [abilityDescriptions, setAbilityDescriptions] = React.useState([]);
   let [moveStats, setMoveStats] = React.useState([]);
 
   React.useEffect(() => {
     Promise.all(
-      abilities.map(ability => {
+      abilities.map((ability) => {
         return Axios.get(ability.ability.url);
       })
-    ).then(values => {
+    ).then((values) => {
       setAbilityDescriptions(
-        values.map(value => value.data.effect_entries[0].short_effect)
+        values.map((value) => value.data.effect_entries[0].short_effect)
       );
     });
   }, [abilities]);
@@ -40,12 +40,12 @@ const PokemonCard = ({ currentPokemon, party, partyHandler, isInParty }) => {
     const { moves } = currentPokemon;
     if (moveStats.length > 0) return;
     Promise.all(
-      moves.slice(0, 4).map(move => {
+      moves.slice(0, 4).map((move) => {
         return Axios.get(move.move.url);
       })
-    ).then(values => {
+    ).then((values) => {
       setMoveStats(
-        values.map(value => ({
+        values.map((value) => ({
           name: value.data.name,
           damage_class: value.data.damage_class.name,
           accuracy: value.data.accuracy,
@@ -60,7 +60,7 @@ const PokemonCard = ({ currentPokemon, party, partyHandler, isInParty }) => {
     setMoveStats([]);
   }, [id]);
 
-  const togglePartyHandler = pokemon => {
+  const togglePartyHandler = (pokemon) => {
     partyHandler(pokemon);
   };
 
@@ -75,7 +75,7 @@ const PokemonCard = ({ currentPokemon, party, partyHandler, isInParty }) => {
       >
         <Box height='100px'>
           <Subheader color='$DarkRed'>{name}</Subheader>
-          {types.map(pokemon => (
+          {types.map((pokemon) => (
             <Span key={pokemon.type.name} color='#000000' textAlign='center'>
               {pokemon.type.name}
             </Span>
@@ -120,7 +120,7 @@ const PokemonCard = ({ currentPokemon, party, partyHandler, isInParty }) => {
               <Box padding='15px 20px'>
                 <Title color='white'>Stats</Title>
                 <ListContainer>
-                  {stats.map(pokemon => (
+                  {stats.map((pokemon) => (
                     <ListItem
                       key={pokemon.stat.name}
                       className={css`

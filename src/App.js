@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { PokedexGlobalProvider } from './Context/PokedexGlobalState';
 import Pokedex from './Components/Pokedex/pokedex';
 import { Box, Container } from './ui';
 
@@ -17,9 +16,7 @@ const App = () => {
         <Container>
           <Switch>
             <Route exact path='/'>
-              <PokedexGlobalProvider>
-                <Pokedex />
-              </PokedexGlobalProvider>
+              <Pokedex />
             </Route>
           </Switch>
         </Container>
