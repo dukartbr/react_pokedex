@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { PokedexGlobalProvider } from './Context/PokedexGlobalState';
-import { BattleGlobalProvider } from './Context/BattleGlobalState';
 import Pokedex from './Components/Pokedex/pokedex';
-import Battle from './Components/Battle/Index';
 import { Box, Container } from './ui';
 
 const App = () => {
@@ -22,11 +20,6 @@ const App = () => {
               <PokedexGlobalProvider>
                 <Pokedex />
               </PokedexGlobalProvider>
-            </Route>
-            <Route path='/battle'>
-              <BattleGlobalProvider>
-                <Battle />
-              </BattleGlobalProvider>
             </Route>
           </Switch>
         </Container>
