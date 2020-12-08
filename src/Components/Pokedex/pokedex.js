@@ -16,12 +16,9 @@ import GenerationsTab from './GenerationsTab';
 import SearchBar from './SearchBar';
 
 const Pokedex = () => {
-  const {
-    party,
-    addLocalStorageToParty,
-    addPokemonToParty,
-    removePokemonFromParty,
-  } = React.useContext(PokedexGlobalContext);
+  const { party, addPokemonToParty, removePokemonFromParty } = React.useContext(
+    PokedexGlobalContext
+  );
   let [generation, setGeneration] = React.useState('gen1');
   let [pokemons, setPokemons] = React.useState([]);
   let [currentPokemon, setcurrentPokemon] = React.useState({
@@ -39,10 +36,6 @@ const Pokedex = () => {
 
   React.useEffect(() => {
     getPokemon(generation);
-    const localStorageRef = JSON.parse(localStorage.getItem('party'));
-    if (localStorageRef) {
-      addLocalStorageToParty(localStorageRef);
-    }
   }, [generation]);
 
   const getPokemon = (gen) => {
