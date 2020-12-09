@@ -30,9 +30,13 @@ const PokemonCard = ({ currentPokemon, partyHandler, isInParty }) => {
         return Axios.get(ability.ability.url);
       })
     ).then((values) => {
-      setAbilityDescriptions(
-        values.map((value) => value.data.effect_entries[0].short_effect)
+      let enVals = values.map(
+        (value) =>
+          value.data.effect_entries.filter(
+            (entry) => entry.language.name === 'en'
+          )[0].short_effect
       );
+      setAbilityDescriptions(enVals);
     });
   }, [abilities]);
 
