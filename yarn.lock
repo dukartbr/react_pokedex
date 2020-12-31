@@ -2885,9 +2885,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30000989, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001165:
-  version "1.0.30001170"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001170.tgz#0088bfecc6a14694969e391cc29d7eb6362ca6a7"
-  integrity sha512-Dd4d/+0tsK0UNLrZs3CvNukqalnVTRrxb5mcQm8rHL49t7V5ZaTygwXkrq+FB+dVDf++4ri8eJnFEJAB8332PA==
+  version "1.0.30001171"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001171.tgz#3291e11e02699ad0a29e69b8d407666fc843eba7"
+  integrity sha512-5Alrh8TTYPG9IH4UkRqEBZoEToWRLvPbSQokvzSz0lii8/FOWKG4keO1HoYfPWs8IF/NH/dyNPg1cmJGvV3Zlg==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -2940,9 +2940,9 @@ chardet@^0.7.0:
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
 cheerio-select-tmp@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/cheerio-select-tmp/-/cheerio-select-tmp-0.1.0.tgz#cfa11dd0a8e2f2b74a5cb6adeaac7f8fd95c0c42"
-  integrity sha512-kx/pq9hxLo6FhjiYqUheSOV0Eb729ZwkXXPrPTeK6kl/VMgaUlsYoAOv3nOJZcHk++V9pI17YNNngtbLVPTB9A==
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/cheerio-select-tmp/-/cheerio-select-tmp-0.1.1.tgz#55bbef02a4771710195ad736d5e346763ca4e646"
+  integrity sha512-YYs5JvbpU19VYJyj+F7oYrIE2BOll1/hRU7rEy/5+v9BzkSo3bK81iAeeQEMI92vRIxz677m72UmJUiVwwgjfQ==
   dependencies:
     css-select "^3.1.2"
     css-what "^4.0.0"
