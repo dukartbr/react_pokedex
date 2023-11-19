@@ -15,7 +15,7 @@ const PokedexLeftHeader = () => {
     >
       <Box pt='5px'>
         <Box textAlign='center' fontFamily='Acme' fontSize='60px' color='white'>
-          RéactDex
+          RéacteDex
         </Box>
       </Box>
     </Box>
